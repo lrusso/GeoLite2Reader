@@ -13,3 +13,10 @@ https://github.com/richardzcode/worldMap.js
 ## GeoLocation database from:
 
 https://dev.maxmind.com/geoip/geoip2/geolite2
+
+## Roadmap
+
+* Web Icon
+* Search Icon
+* Stop searching Icon
+* Finding IPv6 addresses
