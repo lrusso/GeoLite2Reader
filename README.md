@@ -1,4 +1,4 @@
-# GeoLite2
+# GeoLite2 Reader
 
 World map with geolocation in JavaScript using GeoLite2 dumpings.
 
