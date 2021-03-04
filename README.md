@@ -10,13 +10,9 @@ https://lrusso.github.io/GeoLite2/GeoLite2.htm
 
 https://github.com/richardzcode/worldMap.js
 
-## GeoLocation database from:
+## GeoLocation database link (currently using CSV from 2021-03-02):
 
 https://dev.maxmind.com/geoip/geoip2/geolite2
-
-## GeoLite2 CSV date from:
-
-2021-03-02
 
 ## Roadmap
 
