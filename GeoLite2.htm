@@ -134,7 +134,7 @@
 						RAWDATA = RAWDATA.split(",");
 
 						// UPDATING THE LABEL
-						document.getElementsByClassName("geodata")[0].innerHTML = RAWDATA[0] + "<br />" + RAWDATA[1] + "<br />" + RAWDATA[2] + "<br />" + STRING_LATITUDE + RAWDATA[3] + "<br />" + STRING_LATITUDE + RAWDATA[4];
+						document.getElementsByClassName("geodata")[0].innerHTML = RAWDATA[0] + "<br />" + RAWDATA[1] + "<br />" + RAWDATA[2] + "<br />" + STRING_LATITUDE + RAWDATA[3] + "<br />" + STRING_LONGITUDE + RAWDATA[4];
 
 						// GETTING THE IP LOCATION WITHIN THE WORLDMAP
 						var locationX = ((RAWDATA[4] / 360) + 0.5) * document.getElementById("worldmap1").width;
