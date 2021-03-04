@@ -84,7 +84,7 @@
 				}
 
 			// CREATING THE WEB WORKER
-			var myWorker = new Worker("GeoLite2.js");
+			var myWorker = new Worker("GeoLite2Worker.js");
 
 			// SETTING WHAT HAPPENS WHEN DATA IS RECEIVED FROM THE WEB WORKER
 			myWorker.onmessage = function(e)
