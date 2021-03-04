@@ -18,5 +18,6 @@ https://dev.maxmind.com/geoip/geoip2/geolite2
 
 * Web Icon
 * Search Icon
+* Search Modal
 * Stop searching Icon
 * Finding IPv6 addresses
