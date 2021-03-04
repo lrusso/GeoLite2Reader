@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>GeoLite2 Worldmap</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<style>
+			html,body{background-color:black;margin:0;padding:0}
+
+			.container{position:fixed;left:0;top:0;right:0;bottom:0;background-color:gray;display:none}
+			.finding{position:fixed;width:64px;height:64px;left:5px;right:0;top:5px;bottom:0;border:0;display:none}
+			.geodata{position:fixed;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
+			#worldmap1{border:1px solid black;left:0;right:0;margin:0 auto;position:absolute;top:50%;transform:translateY(-50%)}
+
+			.filename{position:fixed;width:200px;height:64px;left:0;right:0;top:150px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center}
+			.percentage{position:fixed;width:64px;height:64px;left:0;right:0;top:210px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center}
+			.pleasewait{position:fixed;width:64px;height:64px;left:0;right:0;top:0;bottom:0;margin:auto auto;border:0}
+			.lds-spinner{color:white;display:inline-block;position:relative;width:64px;height:64px}
+			.lds-spinner div{transform-origin:32px 32px;animation:lds-spinner 1.2s linear infinite}
+			.lds-spinner div:after{content:" ";display:block;position:fixed;top:3px;left:29px;width:5px;height:14px;border-radius:20%;background:white}
+			.lds-spinner div:nth-child(1){transform:rotate(0deg);animation-delay:-1.1s}
+			.lds-spinner div:nth-child(2){transform:rotate(30deg);animation-delay:-1s}
+			.lds-spinner div:nth-child(3){transform:rotate(60deg);animation-delay:-0.9s}
+			.lds-spinner div:nth-child(4){transform:rotate(90deg);animation-delay:-0.8s}
+			.lds-spinner div:nth-child(5){transform:rotate(120deg);animation-delay:-0.7s}
+			.lds-spinner div:nth-child(6){transform:rotate(150deg);animation-delay:-0.6s}
+			.lds-spinner div:nth-child(7){transform:rotate(180deg);animation-delay:-0.5s}
+			.lds-spinner div:nth-child(8){transform:rotate(210deg);animation-delay:-0.4s}
+			.lds-spinner div:nth-child(9){transform:rotate(240deg);animation-delay:-0.3s}
+			.lds-spinner div:nth-child(10){transform:rotate(270deg);animation-delay:-0.2s}
+			.lds-spinner div:nth-child(11){transform:rotate(300deg);animation-delay:-0.1s}
+			.lds-spinner div:nth-child(12){transform:rotate(330deg);animation-delay:0s}
+			@keyframes lds-spinner{0%{opacity:1}100%{opacity:0}}
+		</style>
+	</head>
+	<body>
+		<div class="pleasewait"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+		<div class="filename"></div>
+		<div class="percentage"></div>
+		<div class="container">
+			<canvas id="worldmap1" width="800" height="450"></canvas>
+			<div class="finding"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+			<div class="geodata"></div>
+		</div>
+		<script src="GeoLite2Map.js"></script>
+		<script>
+			// GETTING THE USER LANGUAGE
+			var userLanguage = window.navigator.userLanguage || window.navigator.language;
+
+			var STRING_LANG = "";
+			var STRING_ABOUT = "";
+			var STRING_LATITUDE = "";
+			var STRING_LONGITUDE = "";
+
+			// CHECKING THE USER LANGUAGE
+			if (userLanguage.substring(0,2)=="es")
+				{
+				STRING_LANG = "es";
+				STRING_ABOUT = "Dise" + String.fromCharCode(241) + "ado por www.lrusso.com";
+				STRING_LATITUDE = "Latitud: ";
+				STRING_LONGITUDE = "Longitud: ";
+				}
+				else
+				{
+				STRING_LANG = "en";
+				STRING_ABOUT = "Designed by www.lrusso.com";
+				STRING_LATITUDE = "Latitude: ";
+				STRING_LONGITUDE = "Longitude: ";
+				}
+
+			// CREATING THE WEB WORKER
+			var myWorker = new Worker("GeoLite2.js");
+
+			// SETTING WHAT HAPPENS WHEN DATA IS RECEIVED FROM THE WEB WORKER
+			myWorker.onmessage = function(e)
+				{
+				try
+					{
+					// GETTING THE DATA SENT FROM THE SIMULATOR
+					var myReceivedData = e.data;
+
+					if (myReceivedData.indexOf("TITLE=")===0)
+						{
+						document.getElementsByClassName("filename")[0].innerHTML = myReceivedData.substr(6,myReceivedData.length);
+						}
+					else if (myReceivedData.indexOf("PERCENTAGE=")===0)
+						{
+						document.getElementsByClassName("percentage")[0].innerHTML = myReceivedData.substr(11,myReceivedData.length) + "%";
+						}
+					else if (myReceivedData=="CLEAR_PERCENTAGE")
+						{
+						document.getElementsByClassName("percentage")[0].innerHTML = "";
+						}
+					else if (myReceivedData=="DONE_DOWNLOADING")
+						{
+						document.getElementsByClassName("container")[0].style.display = "block";
+
+						findIP("186.137.149.249");
+						}
+					else if (myReceivedData.indexOf("RESULT=")===0)
+						{
+						showDataInMap(myReceivedData.substr(7,myReceivedData.length));
+						}
+					}
+					catch(err)
+					{
+					}
+
+				return true;
+				}
+
+			function findIP(IPValue)
+				{
+				// SHOWING THE FINDING ANIMATION
+				document.getElementsByClassName("finding")[0].style.display = "block";
+
+				// REQUESTING THE WORKER TO GEOLOCATE THE IP
+				myWorker.postMessage("FIND=" + IPValue);
+				}
+
+			function showDataInMap(RAWDATA)
+				{
+				try
+					{
+					// CHECKING IF THERE WAS AN ERROR
+					if (RAWDATA=="ERROR")
+						{
+						// UPDATING THE LABEL
+						document.getElementsByClassName("geodata")[0].innerHTML = "ERROR";
+						}
+						else
+						{
+						// GETTING ALL THE VALUES
+						RAWDATA = RAWDATA.split(",");
+
+						// UPDATING THE LABEL
+						document.getElementsByClassName("geodata")[0].innerHTML = RAWDATA[0] + "<br />" + RAWDATA[1] + "<br />" + RAWDATA[2] + "<br /> Latitude: " + RAWDATA[3] + "<br />Longitude: " + RAWDATA[4];
+
+						// GETTING THE IP LOCATION WITHIN THE WORLDMAP
+						var locationX = ((RAWDATA[4] / 360) + 0.5) * document.getElementById("worldmap1").width;
+						var locationY = (1 - ((RAWDATA[3] / 180) + 0.5)) * document.getElementById("worldmap1").height;
+
+						// DRAWING THE RED DOT
+						document.getElementById("worldmap1").getContext("2d").beginPath();
+						document.getElementById("worldmap1").getContext("2d").arc(locationX, locationY, 3, 0, 2 * Math.PI);
+						document.getElementById("worldmap1").getContext("2d").fillStyle = "red";
+						document.getElementById("worldmap1").getContext("2d").fill();
+						}
+					}
+					catch(err)
+					{
+					// UPDATING THE LABEL
+					document.getElementsByClassName("geodata")[0].innerHTML = "ERROR";
+					}
+
+				// HIDING THE FINDING ANIMATION
+				document.getElementsByClassName("finding")[0].style.display = "none";
+				}
+
+			// SCALING THE CANVAS SIZE FOR THE GAME
+			function resizeCanvas()
+				{
+				try
+					{
+					var scaleX = window.innerWidth / 800;
+					var scaleY = window.innerHeight / 450;
+					document.getElementById("worldmap1").style.width = (800 * scaleX) + "px";
+					document.getElementById("worldmap1").style.height = (450 * scaleY) + "px";
+					}
+					catch(err)
+					{
+					}
+				}
+
+			// SETTING WHAT WILL HAPPEN WHEN THE WEBSITE IS FULLY LOADED
+			window.addEventListener("resize", function()
+				{
+				// RESIZING THE CANVAS
+				resizeCanvas();
+				});
+
+			// SETTING WHAT WILL HAPPEN WHEN THE WEBSITE IS FULLY LOADED
+			window.addEventListener("load", function()
+				{
+				// STARTING THE DOWNLOADING OF ALL THE TABLES
+				myWorker.postMessage("START_DOWNLOADING_" + STRING_LANG);
+
+				// CREATING THE WORLDMAP
+				var map = new Map();
+				map.draw(document.getElementById("worldmap1"));
+
+				// RESIZING THE CANVAS
+				resizeCanvas();
+				});
+		</script>
+	</body>
+</html>
