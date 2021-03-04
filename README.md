@@ -17,6 +17,7 @@ https://dev.maxmind.com/geoip/geoip2/geolite2
 ## Roadmap
 
 * Web Icon
+* About Toast
 * Search Icon
 * Search Modal
 * Stop Search Icon
