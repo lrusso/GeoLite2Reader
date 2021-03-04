@@ -16,7 +16,7 @@ https://github.com/richardzcode/worldMap.js
 
 https://dev.maxmind.com/geoip/geoip2/geolite2
 
-## Roadmap
+## Roadmap:
 
 * About Toast
 * Search Icon
