@@ -22,3 +22,4 @@ https://dev.maxmind.com/geoip/geoip2/geolite2
 * Search Modal
 * Stop Search Icon
 * Finding IPv6 addresses
+* IPv4 and IPv6 address validation
