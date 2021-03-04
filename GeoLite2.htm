@@ -65,6 +65,8 @@
 			var STRING_LATITUDE = "";
 			var STRING_LONGITUDE = "";
 
+			var IP_TO_GEOLOCATE = "";
+
 			// CHECKING THE USER LANGUAGE
 			if (userLanguage.substring(0,2)=="es")
 				{
@@ -108,7 +110,7 @@
 						{
 						document.getElementsByClassName("container")[0].style.display = "block";
 
-						findIP("186.137.149.249");
+						geolocateIP("186.137.149.249");
 						}
 					else if (myReceivedData.indexOf("RESULT=")===0)
 						{
@@ -122,13 +124,16 @@
 				return true;
 				}
 
-			function findIP(IPValue)
+			function geolocateIP(IPValue)
 				{
+				// UPDATING THE IP VARIABLE
+				IP_TO_GEOLOCATE = IPValue;
+
 				// SHOWING THE FINDING ANIMATION
 				document.getElementsByClassName("finding")[0].style.display = "block";
 
 				// REQUESTING THE WORKER TO GEOLOCATE THE IP
-				myWorker.postMessage("FIND=" + IPValue);
+				myWorker.postMessage("GEOLOCATE=" + IPValue);
 				}
 
 			function showDataInMap(RAWDATA)
@@ -147,7 +152,7 @@
 						RAWDATA = RAWDATA.split(",");
 
 						// UPDATING THE LABEL
-						document.getElementsByClassName("geodata")[0].innerHTML = RAWDATA[0] + "<br />" + RAWDATA[1] + "<br />" + RAWDATA[2] + "<br />" + STRING_LATITUDE + RAWDATA[3] + "<br />" + STRING_LONGITUDE + RAWDATA[4];
+						document.getElementsByClassName("geodata")[0].innerHTML = RAWDATA[0] + "<br />" + RAWDATA[1] + "<br />" + RAWDATA[2] + "<br />" + STRING_LATITUDE + RAWDATA[3] + "<br />" + STRING_LONGITUDE + RAWDATA[4] + "<br/>" + IP_TO_GEOLOCATE;
 
 						// GETTING THE IP LOCATION WITHIN THE WORLDMAP
 						var locationX = ((RAWDATA[4] / 360) + 0.5) * document.getElementById("worldmap1").width;

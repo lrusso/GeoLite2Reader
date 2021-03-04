@@ -317,7 +317,7 @@ self.addEventListener("message", function (e)
 			}
 
 		// CHECKING IF THE BROWSER SETN A MESSAGE TO GEOLOCATE AN IP
-		else if (workerMessage.indexOf("FIND=")===0)
+		else if (workerMessage.indexOf("GEOLOCATE=")===0)
 			{
 			// FINDING THE REQUESTED IP
 			geolocateIP(workerMessage.substr(5,workerMessage.length));
