@@ -14,6 +14,10 @@ https://github.com/richardzcode/worldMap.js
 
 https://dev.maxmind.com/geoip/geoip2/geolite2
 
+## GeoLite2 CSV date from:
+
+2021-03-02
+
 ## Roadmap
 
 * Web Icon
