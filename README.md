@@ -24,3 +24,4 @@ https://dev.maxmind.com/geoip/geoip2/geolite2
 * Stop Search Icon
 * Finding IPv6 addresses
 * Validating IPv4 and IPv6 addresses
+* Distance calculator between two IPs
