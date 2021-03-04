@@ -320,7 +320,7 @@ self.addEventListener("message", function (e)
 		else if (workerMessage.indexOf("GEOLOCATE=")===0)
 			{
 			// FINDING THE REQUESTED IP
-			geolocateIP(workerMessage.substr(5,workerMessage.length));
+			geolocateIP(workerMessage.substr(10,workerMessage.length));
 			}
 		}
 		catch(err)
