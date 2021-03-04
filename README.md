@@ -2,6 +2,8 @@
 
 World map with geolocation in JavaScript using GeoLite2 dumpings.
 
+![alt screenshot](https://raw.githubusercontent.com/lrusso/GeoLite2/main/GeoLite2.png)
+
 ## Web:
 
 https://lrusso.github.io/GeoLite2/GeoLite2.htm
