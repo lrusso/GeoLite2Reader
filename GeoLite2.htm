@@ -114,7 +114,7 @@
 				STRING_ABOUT = "Dise" + String.fromCharCode(241) + "ado por www.lrusso.com";
 				STRING_LATITUDE = "Latitud: ";
 				STRING_LONGITUDE = "Longitud: ";
-				STRING_INVALIDIP = "IP inv" + String.fromCharCode(225) + "lida.";
+				STRING_INVALIDIP = "IP INV" + String.fromCharCode(193) + "LIDA.";
 				STRING_IPNOTFOUND = "IP NO ENCONTRADA.";
 				STRING_INPUTMODAL_TITLE = "INGRESE UNA IP";
 				STRING_INPUTMODAL_OK = "Aceptar";
@@ -207,7 +207,7 @@
 					var matchIPV4 = IPValue.match(IPV4_VALIDATION);
 
 					// CHECKING IF THE INPUTTED IP IS A IPV4 ADDRESS
-					if (matchIPV4)
+					if (matchIPV4 && IPValue!="0.0.0.0")
 						{
 						// UPDATING THE IP VARIABLE
 						IP_TO_GEOLOCATE = IPValue;
