@@ -22,6 +22,7 @@
 
 			.container{position:fixed;left:0;top:0;right:0;bottom:0;background-color:gray;display:none}
 			.finding{position:fixed;width:64px;height:64px;left:5px;right:0;top:5px;bottom:0;border:0;display:none}
+			.findlocation1{position:fixed;top:0px;right:0px;width:58px;height:58px;padding:10px 10px 0 10px;border-bottom-left-radius:10px;background-color:rgba(0,0,0,0.5);cursor:pointer;background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QMGCBsJNm8nGwAAA91JREFUaN7VmctrVVcUxr/t1arRGK0tGoUmUbADsQMVIiI20A4UpSD0JTgsCI6E+qAiKI6q/4ATpQYLotWCOBCDD9CBA4s66HPQYCFNmqvWIK0PvDe/TlbguLvvzXlej98kOfvus9b69t5r7bXWccoAwEnqkLRIUpukEUmjzrmaygjAASuBQ8Bt4F/+jzowBJwEPgZml8HwKcA24HeS4xlwFFj4qozvA+6QHf8AB4EZrTwue4DxSQx7BPwM/GBHpzbJ/JtAZ9HGzwC+bWDAc+AMsBWYG3i3AvQCXwODDWQMAauKXPmQ8eNAP9DV5N0eYAMwx56nAduBkYC8h8CSIgjsDih7APTFcPRhm18DLgAf2G9z7NnHj0B73g7rn/lfgJ6Y718KGHkOWGBH60jg99N5hso7gZXvSSCjAnwEfGe+MoE/gOV2PPsDJNblQWBb4Mz3ZZC3ABiIyBsFui1A3ApEJpfVcf1Lqj+HRanYrT2Bu+bYvYFd2JhF0cpAqOzK0beix2aXjZ31dB7PouCQJ+xMzpFtNvCbya4C04H3PZ1VoJJWwW1P2NYCwvMXEfmf2/G67+ldm1TuFHOed73xiwXckeckvbD/P3TO1SVd8uYsS0zA8vm2yNiYc24sb+udc48kfW+P3fb3njdtcVK5U60YiWKkwDTrS0mDthshXYvSEGjzxp4UZb1z7k9J+5rompXmCPmr0MrCw9c1nIbAqKTxqNDU4Sw5OjMTsAI8ugsVSatbRMAPm0NpdkCSrnnjW1pQ8b0jKVrU1CVdT0vgvDf+KTC1YA7+ZXnDOfd32tVot+5BFNsLXP25VpFFsTOr0KOewJGJ0rAAAoc9XWPA/KxCF1rrI4oLeUckYHOg6tuTl/CDgTz9SKZi42X57wGPA8X9zDzbKTcDJE5kbUjZyj9u0GbZn9ciCei0vo2PW0BvSoc9HKNB9g3wRl4kVgWixATOWjFSmSzOA3ubyAnhKjAvUX7VxICldj8sbzDlgeXz9+wmf2K5TafdsGk7b79K2uScG8xjJ9qB0+SHuLtRBdbkGfrWNXDuuBizRvFM4EDMd54Cn+TdM90IHA/UsiHUgGvAzuglZXJOJiC/t1mEcinJVCT1Wg272CqpWZYOD1tWeb1RbgNMlzQgaX1Mlcck7XDOvVBZALwZabXEwQDQoTIBWBrzOEa72V1lI7E2kAk3w1+FfRzJQOKzhFGtagVRqUh8lZDElbIRcMCxBARqZXTqacDlBCRWqGyw7PWnGMbXW/bNOQWJbos2zXBKZYal9NUGxg8Db6nssJriSuTrfx04Bbyt1wlAB7AiVDv/B3xmQ8gSCafPAAAAAElFTkSuQmCC');background-repeat:no-repeat;background-position:center center}
 			.geodata{position:fixed;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
 			#worldmap1{border:1px solid black;left:0;right:0;margin:0 auto;position:absolute;top:50%;transform:translateY(-50%)}
 
@@ -29,7 +30,7 @@
 			.percentage{position:fixed;width:64px;height:64px;left:0;right:0;top:190px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;cursor:default}
 			.pleasewait{position:fixed;width:64px;height:64px;left:0;right:0;top:-60px;bottom:0;margin:auto auto;border:0}
 
-			.aboutcontainer{position:fixed;left:50%;transform:translateX(-50%);white-space:nowrap;bottom:0;z-index:399;cursor:default;margin-bottom:20px;padding:10px;border-radius:10px;text-shadow: 0 0 3px #000000,0 0 7px #000000;font-family:Arial;font-size:25px;font-weight:bold;color:white;background-color:rgba(0,0,0,0.5);display:none}
+			.aboutcontainer{position:fixed;left:50%;transform:translateX(-50%);white-space:nowrap;bottom:0;z-index:399;cursor:default;margin-bottom:20px;padding:10px;border-radius:10px;text-shadow:0 0 3px #000000,0 0 7px #000000;font-family:Arial;font-size:25px;font-weight:bold;color:white;background-color:rgba(0,0,0,0.5);display:none}
 			.abouthidden{animation:fadeOut 1.5s;animation-fill-mode:forwards}
 			@keyframes fadeOut{0%{opacity:1}99%{opacity:0.01}100%{opacity:0}}
 
@@ -65,6 +66,7 @@
 			<canvas id="worldmap1" width="800" height="450"></canvas>
 			<div class="finding"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
 			<div class="geodata"></div>
+			<div class="findlocation1"></div>
 			<div class="aboutcontainer" id="about"></div>
 		</div>
 		<script src="GeoLite2Map.js"></script>
