@@ -97,6 +97,7 @@
 			var STRING_ABOUT = "";
 			var STRING_LATITUDE = "";
 			var STRING_LONGITUDE = "";
+			var STRING_INVALIDIP = "";
 			var STRING_IPNOTFOUND = "";
 			var STRING_INPUTMODAL_TITLE = "";
 			var STRING_INPUTMODAL_OK = "";
@@ -113,6 +114,7 @@
 				STRING_ABOUT = "Dise" + String.fromCharCode(241) + "ado por www.lrusso.com";
 				STRING_LATITUDE = "Latitud: ";
 				STRING_LONGITUDE = "Longitud: ";
+				STRING_INVALIDIP = "IP inv" + String.fromCharCode(225) + "lida.";
 				STRING_IPNOTFOUND = "IP NO ENCONTRADA.";
 				STRING_INPUTMODAL_TITLE = "INGRESE UNA IP";
 				STRING_INPUTMODAL_OK = "Aceptar";
@@ -124,6 +126,7 @@
 				STRING_ABOUT = "Designed by www.lrusso.com";
 				STRING_LATITUDE = "Latitude: ";
 				STRING_LONGITUDE = "Longitude: ";
+				STRING_INVALIDIP = "INVALID IP.";
 				STRING_IPNOTFOUND = "IP NOT FOUND.";
 				STRING_INPUTMODAL_TITLE = "INPUT AN IP";
 				STRING_INPUTMODAL_OK = "OK";
@@ -197,21 +200,36 @@
 				// CHECKING IF A VALUE WAS RECEIVED
 				if (IPValue!=undefined)
 					{
-					// UPDATING THE IP VARIABLE
-					IP_TO_GEOLOCATE = IPValue;
+					// REGEX FOR VALIDATING THE IPV4 ADDRESSES
+					var IPV4_VALIDATION = new RegExp("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
 
-					// CLEARING THE GEODATA LABEL
-					document.getElementsByClassName("geodata")[0].innerHTML = "";
+					// VALIDATING THE IPV4 ADDRESS
+					var matchIPV4 = IPValue.match(IPV4_VALIDATION);
 
-					// HIDING THE FIND LOCATION 1 ICON
-					document.getElementsByClassName("findlocation1")[0].style.display = "none";
+					// CHECKING IF THE INPUTTED IP IS A IPV4 ADDRESS
+					if (matchIPV4)
+						{
+						// UPDATING THE IP VARIABLE
+						IP_TO_GEOLOCATE = IPValue;
 
-					// SHOWING THE LOADING ICONS
-					document.getElementsByClassName("waitlocation1")[0].style.display = "block";
-					document.getElementsByClassName("finding")[0].style.display = "block";
+						// CLEARING THE GEODATA LABEL
+						document.getElementsByClassName("geodata")[0].innerHTML = "";
 
-					// REQUESTING THE WORKER TO GEOLOCATE THE IP
-					myWorker.postMessage("GEOLOCATE=" + IPValue);
+						// HIDING THE FIND LOCATION 1 ICON
+						document.getElementsByClassName("findlocation1")[0].style.display = "none";
+
+						// SHOWING THE LOADING ICONS
+						document.getElementsByClassName("waitlocation1")[0].style.display = "block";
+						document.getElementsByClassName("finding")[0].style.display = "block";
+
+						// REQUESTING THE WORKER TO GEOLOCATE THE IP
+						myWorker.postMessage("GEOLOCATE=" + IPValue);
+						}
+						else
+						{
+						// ADDING THE 'INVALID IP' TEXT VALUE
+						document.getElementsByClassName("geodata")[0].innerHTML = STRING_INVALIDIP + "<br />IP: " + IPValue;
+						}
 					}
 				}
 
