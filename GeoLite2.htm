@@ -28,6 +28,17 @@
 			.filename{position:fixed;width:200px;height:64px;left:0;right:0;top:110px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;cursor:default}
 			.percentage{position:fixed;width:64px;height:64px;left:0;right:0;top:190px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;cursor:default}
 			.pleasewait{position:fixed;width:64px;height:64px;left:0;right:0;top:-60px;bottom:0;margin:auto auto;border:0}
+
+			.aboutcontainer{position:fixed;left:50%;transform:translateX(-50%);white-space:nowrap;bottom:0;z-index:399;cursor:default;margin-bottom:20px;padding:10px;border-radius:10px;text-shadow: 0 0 3px #000000,0 0 7px #000000;font-family:Arial;font-size:25px;font-weight:bold;color:white;background-color:rgba(0,0,0,0.5);display:none}
+			.abouthidden{animation:fadeOut 1.5s;animation-fill-mode:forwards}
+			@keyframes fadeOut{0%{opacity:1}99%{opacity:0.01}100%{opacity:0}}
+
+			/* iPods and other very small devices (portrait and landscape)(very small) */
+			@media screen and (min-width: 0) and (max-width: 320px)
+				{
+				.aboutcontainer{font-size:18px;margin-bottom:10px}
+				}
+
 			.lds-spinner{color:white;display:inline-block;position:relative;width:64px;height:64px}
 			.lds-spinner div{transform-origin:32px 32px;animation:lds-spinner 1.2s linear infinite}
 			.lds-spinner div:after{content:" ";display:block;position:fixed;top:3px;left:29px;width:5px;height:14px;border-radius:20%;background:white}
@@ -54,6 +65,7 @@
 			<canvas id="worldmap1" width="800" height="450"></canvas>
 			<div class="finding"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
 			<div class="geodata"></div>
+			<div class="aboutcontainer" id="about"></div>
 		</div>
 		<script src="GeoLite2Map.js"></script>
 		<script>
@@ -109,6 +121,21 @@
 					else if (myReceivedData=="DONE_DOWNLOADING")
 						{
 						document.getElementsByClassName("container")[0].style.display = "block";
+
+						// SHOWING THE ABOUT BOX
+						document.getElementById("about").style.display = "block";
+
+						// FADING OUT THE ABOUT BOX
+						setTimeout(function()
+							{
+							document.getElementById("about").className = "aboutcontainer abouthidden";
+							}, 3000);
+
+						// HIDING THE ABOUT BOX
+						setTimeout(function()
+							{
+							document.getElementById("about").style.display = "none";
+							}, 4500);
 
 						geolocateIP("186.137.149.249");
 						}
@@ -200,6 +227,9 @@
 			// SETTING WHAT WILL HAPPEN WHEN THE WEBSITE IS FULLY LOADED
 			window.addEventListener("load", function()
 				{
+				// UPDATING THE ABOUT BOX TEXT
+				document.getElementById("about").innerHTML = STRING_ABOUT;
+
 				// STARTING THE DOWNLOADING OF ALL THE TABLES
 				myWorker.postMessage("START_DOWNLOADING_" + STRING_LANG);
 
