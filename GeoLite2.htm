@@ -79,6 +79,8 @@
 			var STRING_LATITUDE = "";
 			var STRING_LONGITUDE = "";
 
+			var IP_EXAMPLE = "186.137.149.249";
+
 			var IP_TO_GEOLOCATE = "";
 
 			// CHECKING THE USER LANGUAGE
@@ -143,7 +145,8 @@
 							document.getElementById("about").style.display = "none";
 							}, 4500);
 
-						geolocateIP("186.137.149.249");
+						// GEOLOCATING THE EXAMPLE IP
+						geolocateIP(IP_EXAMPLE);
 						}
 					else if (myReceivedData.indexOf("RESULT=")===0)
 						{
