@@ -97,6 +97,9 @@
 			var STRING_ABOUT = "";
 			var STRING_LATITUDE = "";
 			var STRING_LONGITUDE = "";
+			var STRING_INPUTMODAL_TITLE = "";
+			var STRING_INPUTMODAL_OK = "";
+			var STRING_INPUTMODAL_CANCEL = "";
 
 			var IP_EXAMPLE = "186.137.149.249";
 
@@ -109,6 +112,9 @@
 				STRING_ABOUT = "Dise" + String.fromCharCode(241) + "ado por www.lrusso.com";
 				STRING_LATITUDE = "Latitud: ";
 				STRING_LONGITUDE = "Longitud: ";
+				STRING_INPUTMODAL_TITLE = "INGRESE UNA IP";
+				STRING_INPUTMODAL_OK = "Aceptar";
+				STRING_INPUTMODAL_CANCEL = "Cancelar";
 				}
 				else
 				{
@@ -116,6 +122,9 @@
 				STRING_ABOUT = "Designed by www.lrusso.com";
 				STRING_LATITUDE = "Latitude: ";
 				STRING_LONGITUDE = "Longitude: ";
+				STRING_INPUTMODAL_TITLE = "INPUT AN IP";
+				STRING_INPUTMODAL_OK = "OK";
+				STRING_INPUTMODAL_CANCEL = "Cancel";
 				}
 
 			// CREATING THE WEB WORKER
@@ -182,15 +191,25 @@
 
 			function geolocateIP(IPValue)
 				{
-				// UPDATING THE IP VARIABLE
-				IP_TO_GEOLOCATE = IPValue;
+				// CHECKING IF A VALUE WAS RECEIVED
+				if (IPValue!=undefined)
+					{
+					// UPDATING THE IP VARIABLE
+					IP_TO_GEOLOCATE = IPValue;
 
-				// SHOWING THE LOADING ICONS
-				document.getElementsByClassName("waitlocation1")[0].style.display = "block";
-				document.getElementsByClassName("finding")[0].style.display = "block";
+					// CLEARING THE GEODATA LABEL
+					document.getElementsByClassName("geodata")[0].innerHTML = "";
 
-				// REQUESTING THE WORKER TO GEOLOCATE THE IP
-				myWorker.postMessage("GEOLOCATE=" + IPValue);
+					// HIDING THE FIND LOCATION 1 ICON
+					document.getElementsByClassName("findlocation1")[0].style.display = "none";
+
+					// SHOWING THE LOADING ICONS
+					document.getElementsByClassName("waitlocation1")[0].style.display = "block";
+					document.getElementsByClassName("finding")[0].style.display = "block";
+
+					// REQUESTING THE WORKER TO GEOLOCATE THE IP
+					myWorker.postMessage("GEOLOCATE=" + IPValue);
+					}
 				}
 
 			function showDataInMap(RAWDATA)
@@ -215,8 +234,43 @@
 						// GETTING ALL THE VALUES
 						RAWDATA = RAWDATA.split(",");
 
-						// UPDATING THE LABEL
-						document.getElementsByClassName("geodata")[0].innerHTML = RAWDATA[0] + "<br />" + RAWDATA[1] + "<br />" + RAWDATA[2] + "<br />" + STRING_LATITUDE + RAWDATA[3] + "<br />" + STRING_LONGITUDE + RAWDATA[4] + "<br/>IP: " + IP_TO_GEOLOCATE;
+						// CHECKING IF THERE IS A REGION
+						if (RAWDATA[0]!="")
+							{
+							// ADDING THE REGION VALUE
+							document.getElementsByClassName("geodata")[0].innerHTML = RAWDATA[0];
+							}
+
+						// CHECKING IF THERE IS A COUNTRY
+						if (RAWDATA[1]!="")
+							{
+							// ADDING THE COUNTRY VALUE
+							document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br />" + RAWDATA[1];
+							}
+
+						// CHECKING IF THERE IS A CITY
+						if (RAWDATA[2]!="")
+							{
+							// ADDING THE CITY VALUE
+							document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br />" + RAWDATA[2];
+							}
+
+						// CHECKING IF THERE IS A LATITUDE
+						if (RAWDATA[3]!="")
+							{
+							// ADDING THE LATITUDE VALUE
+							document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br />" + STRING_LATITUDE + RAWDATA[3];
+							}
+
+						// CHECKING IF THERE IS A LONGITUDE
+						if (RAWDATA[4]!="")
+							{
+							// ADDING THE LONGITUDE VALUE
+							document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br />" + STRING_LONGITUDE + RAWDATA[4];
+							}
+
+						// ADDING THE IP VALUE
+						document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br/>IP: " + IP_TO_GEOLOCATE;
 
 						// GETTING THE IP LOCATION WITHIN THE WORLDMAP
 						var locationX = ((RAWDATA[4] / 360) + 0.5) * document.getElementById("worldmap1").width;
@@ -251,6 +305,128 @@
 					}
 				}
 
+			function inputCustom(title,yes,no,myCallback)
+				{
+				try
+					{
+					// CREATING THE INPUT CONTAINER
+					var inputContainer = document.createElement("div");
+					inputContainer.style.position = "fixed";
+					inputContainer.style.top = 0;
+					inputContainer.style.bottom = 0;
+					inputContainer.style.left = 0;
+					inputContainer.style.right = 0;
+					inputContainer.style.zIndex = 9999;
+					inputContainer.style.backgroundColor = "rgba(0,0,0,0.5)";
+
+					// CREATING THE INPUT FORM
+					var inputForm = document.createElement("div");
+					inputForm.style.position = "relative";
+					inputForm.style.top = "50%";
+					inputForm.style.left = 0;
+					inputForm.style.right = 0;
+					inputForm.style.marginLeft = "auto";
+					inputForm.style.marginRight = "auto";
+					inputForm.style.transform = "translateY(-50%)";
+					inputForm.style.width = "300px";
+					inputForm.style.backgroundColor = "#f2f2f2";
+					inputForm.style.textAlign = "center";
+
+					// CREATING THE INPUT TITLE
+					var inputTitle = document.createElement("div");
+					inputTitle.style.textAlign = "left";
+					inputTitle.style.paddingLeft = "10px";
+					inputTitle.style.backgroundColor = "#3a76b1";
+					inputTitle.style.fontFamily = "Arial";
+					inputTitle.style.fontSize = "16px";
+					inputTitle.style.fontWeight = "bold";
+					inputTitle.style.color = "white";
+					inputTitle.style.lineHeight = 2.5;
+					inputTitle.style.userSelect = "none";
+					inputTitle.innerHTML = title;
+
+					// CREATING THE INPUT TEXTBOX
+					var inputTextbox = document.createElement("input");
+					inputTextbox.type = "text";
+					inputTextbox.style.outline = "none"; 
+					inputTextbox.style.width = "260px";
+					inputTextbox.style.border = "1px solid #b2b2b2";
+					inputTextbox.style.padding = "10px";
+					inputTextbox.style.fontFamily = "Arial";
+					inputTextbox.style.fontSize = "16px";
+					inputTextbox.style.color = "black";
+					inputTextbox.style.textAlign = "left";
+					inputTextbox.style.marginTop = "10px";
+					inputTextbox.style.marginBottom = "10px";
+
+					// CREATING THE INPUT YES BUTTON
+					var inputButtonYes = document.createElement("div");
+					inputButtonYes.style.padding = "10px";
+					inputButtonYes.style.backgroundColor = "#d2d2d2";
+					inputButtonYes.style.border = "1px solid #b2b2b2";
+					inputButtonYes.style.fontFamily = "Arial";
+					inputButtonYes.style.fontSize = "16px";
+					inputButtonYes.style.color = "black";
+					inputButtonYes.style.textAlign = "center";
+					inputButtonYes.style.lineHeight = 1.5;
+					inputButtonYes.style.display = "inline-block";
+					inputButtonYes.style.marginBottom = "10px";
+					inputButtonYes.style.paddingLeft = "30px";
+					inputButtonYes.style.paddingRight = "30px";
+					inputButtonYes.style.cursor = "pointer";
+					inputButtonYes.style.userSelect = "none";
+					inputButtonYes.addEventListener("click",function(event)
+						{
+						// EXECUTING THE CALLBACK FUNCTION
+						myCallback(inputTextbox.value);
+
+						// REMOVING THE INPUT CONTAINER
+						document.body.removeChild(inputContainer);
+						});
+					inputButtonYes.innerHTML = yes;
+
+					// CREATING THE INPUT NO BUTTON
+					var inputButtonNo = document.createElement("div");
+					inputButtonNo.style.padding = "10px";
+					inputButtonNo.style.backgroundColor = "#d2d2d2";
+					inputButtonNo.style.border = "1px solid #b2b2b2";
+					inputButtonNo.style.fontFamily = "Arial";
+					inputButtonNo.style.fontSize = "16px";
+					inputButtonNo.style.color = "black";
+					inputButtonNo.style.textAlign = "center";
+					inputButtonNo.style.lineHeight = 1.5;
+					inputButtonNo.style.display = "inline-block";
+					inputButtonNo.style.marginLeft = "20px";
+					inputButtonNo.style.marginBottom = "10px";
+					inputButtonNo.style.paddingLeft = "30px";
+					inputButtonNo.style.paddingRight = "30px";
+					inputButtonNo.style.cursor = "pointer";
+					inputButtonNo.style.userSelect = "none";
+					inputButtonNo.addEventListener("click",function(event)
+						{
+						// REMOVING THE INPUT CONTAINER
+						document.body.removeChild(inputContainer);
+						});
+					inputButtonNo.innerHTML = no;
+
+					// ADDING ALL THE ELEMENTS TO THE INPUT CONTAINER
+					inputForm.appendChild(inputTitle);
+					inputForm.appendChild(inputTextbox);
+					inputForm.appendChild(inputButtonYes);
+					inputForm.appendChild(inputButtonNo);
+					inputContainer.appendChild(inputForm);
+
+					// ADDING THE CONFIRM INPUT TO THE DOCUMENT
+					document.body.appendChild(inputContainer);
+
+					// FOCUSING THE INPUT TEXT
+					inputTextbox.focus();
+					}
+					catch(err)
+					{
+					}
+				}
+
 			// SETTING WHAT WILL HAPPEN WHEN THE WEBSITE IS FULLY LOADED
 			window.addEventListener("resize", function()
 				{
@@ -273,6 +449,13 @@
 
 				// RESIZING THE CANVAS
 				resizeCanvas();
+
+				// SETTING WHAT WILL HAPPEN WHEN THE USER CLICKS ON THE FIND LOCATION 1 ICON
+				document.getElementsByClassName("findlocation1")[0].addEventListener("click",function(event)
+					{
+					// SHOWING THE INPUT MODAL
+					inputCustom(STRING_INPUTMODAL_TITLE,STRING_INPUTMODAL_OK,STRING_INPUTMODAL_CANCEL, geolocateIP);
+					});
 				});
 		</script>
 	</body>
