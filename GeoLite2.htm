@@ -284,6 +284,10 @@
 						var locationX = ((RAWDATA[4] / 360) + 0.5) * document.getElementById("worldmap1").width;
 						var locationY = (1 - ((RAWDATA[3] / 180) + 0.5)) * document.getElementById("worldmap1").height;
 
+						// REDRAWING THE WORLDMAP
+						var map = new Map();
+						map.draw(document.getElementById("worldmap1"));
+
 						// DRAWING THE RED DOT
 						document.getElementById("worldmap1").getContext("2d").beginPath();
 						document.getElementById("worldmap1").getContext("2d").arc(locationX, locationY, 3, 0, 2 * Math.PI);
