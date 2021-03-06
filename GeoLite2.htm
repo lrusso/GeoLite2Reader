@@ -110,18 +110,22 @@
 
 					if (myReceivedData.indexOf("TITLE=")===0)
 						{
+						// UPDATING THE DOWNLOADING TITLE
 						document.getElementsByClassName("filename")[0].innerHTML = myReceivedData.substr(6,myReceivedData.length);
 						}
 					else if (myReceivedData.indexOf("PERCENTAGE=")===0)
 						{
+						// UPDATING THE PERCENTAGE LABEL
 						document.getElementsByClassName("percentage")[0].innerHTML = myReceivedData.substr(11,myReceivedData.length) + "%";
 						}
 					else if (myReceivedData=="CLEAR_PERCENTAGE")
 						{
+						// CLEARING THE PERCENTAGE LABEL
 						document.getElementsByClassName("percentage")[0].innerHTML = "";
 						}
 					else if (myReceivedData=="DONE_DOWNLOADING")
 						{
+						// SHOWING THE CONTAINER
 						document.getElementsByClassName("container")[0].style.display = "block";
 
 						// SHOWING THE ABOUT BOX
@@ -143,6 +147,7 @@
 						}
 					else if (myReceivedData.indexOf("RESULT=")===0)
 						{
+						// SHOWING THE RESULT IN THE MAP
 						showDataInMap(myReceivedData.substr(7,myReceivedData.length));
 						}
 					}

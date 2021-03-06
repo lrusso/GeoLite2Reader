@@ -243,15 +243,25 @@ function geolocateIP(requestedIP)
 		var IP_Country = null;
 		var IP_City = null;
 
-		for (var i=IP_Parts[2];i>=0;i--)
+		// LOOPING ALL THE IP POSSIBILITES TO FIND THE MOST ACCURATE LOCATION
+		for (var i=IP_Parts[2]; i>=0; i--)
 			{
+			// CREATING THE REGEX TO FIND A LINE THAT CONTAINS THE IP
 			var IP_Regex = new RegExp(IP_Parts[0] + "." + IP_Parts[1] + "." + i + ".0.*\\s")
+
+			// CHECKING IF THE IP WASN'T FOUND ALREADY
 			if (IP_Found==false)
 				{
+				// FINDING THE IP
 				IP_Match = GEOIP2_BLOCKS_IPV4.match(IP_Regex);
+
+				// CHECKING IF THE IP WAS FOUND
 				if (IP_Match)
 					{
+					// SETTING THAT THE IP WAS FOUND
 					IP_Found = true;
+
+					// SETTING THE OBTAINED IP DATA
 					IP_Data = IP_Match[0].split(",");
 					IP_GeoNameID = IP_Data[1] + ".*\\s";
 					IP_Latitude = IP_Data[7];
@@ -260,25 +270,34 @@ function geolocateIP(requestedIP)
 				}
 			}
 
+		// FINDING THE IP LOCATION
 		IP_Location = GEOIP2_LOCATIONS.match(new RegExp(IP_GeoNameID));
+
+		// CHECKING IF THE LOCATION WAS FOUND
 		if (IP_Location)
 			{
+			// GETTING THE LOCATION RAW DATA
 			IP_LocationData = IP_Location[0].split(",");
 
+			// GETTING THE REGION
 			IP_Region = IP_LocationData[3];
 			IP_Region = IP_Region.replace(/["]+/g,"");
 
+			// GETTING THE COUNTRY
 			IP_Country = IP_LocationData[5];
 			IP_Country = IP_Country.replace(/["]+/g,"");
 
+			// GETTING THE CITY
 			IP_City = IP_LocationData[7];
 			IP_City = IP_City.replace(/["]+/g,"");
 			}
 
+		// SENDING THE RESULT LOCATION TO THE BROWSER
 		self.postMessage("RESULT=" + IP_Region + "," + IP_Country + "," + IP_City + "," + IP_Latitude + "," + IP_Longitude);
 		}
 		catch(err)
 		{
+		// SENDING AN ERROR EVENT TO THE BROWSER
 		self.postMessage("RESULT=ERROR");
 		}
 	}
