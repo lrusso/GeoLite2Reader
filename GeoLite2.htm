@@ -358,6 +358,18 @@
 					inputTextbox.style.textAlign = "left";
 					inputTextbox.style.marginTop = "10px";
 					inputTextbox.style.marginBottom = "10px";
+					inputTextbox.addEventListener("keyup",function(event)
+						{
+						// CHECKING IF THE USER PRESSED THE ENTER KEY
+						if (event.keyCode == 13)
+							{
+							// EXECUTING THE CALLBACK FUNCTION
+							myCallback(inputTextbox.value);
+
+							// REMOVING THE INPUT CONTAINER
+							document.body.removeChild(inputContainer);
+							}
+						});
 
 					// CREATING THE INPUT YES BUTTON
 					var inputButtonYes = document.createElement("div");
