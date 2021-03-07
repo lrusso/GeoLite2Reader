@@ -31,6 +31,8 @@
 			.geodata2{position:fixed;bottom:0;left:0;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
 			#worldmap1{position:fixed;left:0;top:0;right:0;bottom:0}
 			.distance{position:fixed;left:10px;top:0;bottom:0;margin:auto auto;height:20px;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;text-shadow:0 0 3px #000000,0 0 7px #000000}
+			.ip1{text-decoration:underline;text-decoration-color:#32cd32}
+			.ip2{text-decoration:underline;text-decoration-color:red}
 
 			.filename{position:fixed;width:200px;height:64px;left:0;right:0;top:110px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;cursor:default}
 			.percentage{position:fixed;width:64px;height:64px;left:0;right:0;top:190px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;cursor:default}
@@ -253,7 +255,7 @@
 						else
 						{
 						// ADDING THE 'INVALID IP' TEXT VALUE
-						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = STRING_INVALIDIP + "<br />IP: " + IPValue;
+						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = STRING_INVALIDIP + "<br /><div class='ip" + findlocationIndex + "'>IP: " + IPValue + "</div>";
 						}
 					}
 				}
@@ -321,7 +323,7 @@
 							}
 
 						// ADDING THE IP VALUE
-						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML + "<br/>IP: " + RAWDATA[5];
+						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML + "<br /><div class='ip" + findlocationIndex + "'>IP: " + RAWDATA[5] + "</div>";
 
 						// GETTING THE IP LOCATION WITHIN THE WORLDMAP
 						var locationX = ((RAWDATA[4] / 360) + 0.5) * document.getElementById("worldmap1").width;
