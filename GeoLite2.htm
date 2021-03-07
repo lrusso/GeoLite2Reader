@@ -29,7 +29,8 @@
 			.finding2{position:fixed;width:64px;height:64px;left:5px;right:0;bottom:5px;bottom:0;border:0;display:none}
 			.geodata1{position:fixed;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
 			.geodata2{position:fixed;bottom:0;left:0;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
-			#worldmap1{border:1px solid black;left:0;right:0;margin:0 auto;position:absolute;top:50%;transform:translateY(-50%)}
+			#worldmap1{position:fixed;left:0;top:0;right:0;bottom:0}
+			.distance{position:fixed;left:10px;top:0;bottom:0;margin:auto auto;height:20px;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;text-shadow:0 0 3px #000000,0 0 7px #000000}
 
 			.filename{position:fixed;width:200px;height:64px;left:0;right:0;top:110px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;cursor:default}
 			.percentage{position:fixed;width:64px;height:64px;left:0;right:0;top:190px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;cursor:default}
@@ -90,6 +91,7 @@
 			<div class="finding2"><div class="lds-spinner2"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
 			<div class="geodata1"></div>
 			<div class="geodata2"></div>
+			<div class="distance"></div>
 			<div class="findlocation1"></div>
 			<div class="waitlocation1"><div class="lds-spinner2"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
 			<div class="findlocation2"></div>
@@ -103,6 +105,7 @@
 
 			var STRING_LANG = "";
 			var STRING_ABOUT = "";
+			var STRING_DISTANCE = "";
 			var STRING_LATITUDE = "";
 			var STRING_LONGITUDE = "";
 			var STRING_INVALIDIP = "";
@@ -111,8 +114,8 @@
 			var STRING_INPUTMODAL_OK = "";
 			var STRING_INPUTMODAL_CANCEL = "";
 
-			var IP1_EXAMPLE = "186.137.149.249";
-			var IP2_EXAMPLE = "11.11.11.11";
+			var IP1_EXAMPLE = "11.11.11.11";
+			var IP2_EXAMPLE = "186.137.149.249";
 
 			var IP_TO_GEOLOCATE = "";
 
@@ -124,6 +127,7 @@
 				{
 				STRING_LANG = "es";
 				STRING_ABOUT = "Dise" + String.fromCharCode(241) + "ado por www.lrusso.com";
+				STRING_DISTANCE = "Distancia: ";
 				STRING_LATITUDE = "Latitud: ";
 				STRING_LONGITUDE = "Longitud: ";
 				STRING_INVALIDIP = "IP INV" + String.fromCharCode(193) + "LIDA.";
@@ -136,6 +140,7 @@
 				{
 				STRING_LANG = "en";
 				STRING_ABOUT = "Designed by www.lrusso.com";
+				STRING_DISTANCE = "Distance: ";
 				STRING_LATITUDE = "Latitude: ";
 				STRING_LONGITUDE = "Longitude: ";
 				STRING_INVALIDIP = "INVALID IP.";
@@ -325,11 +330,11 @@
 						// SAVING THE IP LOCATION
 						if (findlocationIndex==1)
 							{
-							IP1 = { x: locationX, y: locationY };
+							IP1 = { x: locationX, y: locationY, latitude: RAWDATA[3], longitude: RAWDATA[4]};
 							}
 						else if (findlocationIndex==2)
 							{
-							IP2 = { x: locationX, y: locationY };
+							IP2 = { x: locationX, y: locationY, latitude: RAWDATA[3], longitude: RAWDATA[4]};
 							}
 
 						// REDRAWING THE WORLDMAP
@@ -341,7 +346,7 @@
 							{
 							document.getElementById("worldmap1").getContext("2d").beginPath();
 							document.getElementById("worldmap1").getContext("2d").arc(IP1.x, IP1.y, 3, 0, 2 * Math.PI);
-							document.getElementById("worldmap1").getContext("2d").fillStyle = "red";
+							document.getElementById("worldmap1").getContext("2d").fillStyle = "#32cd32";
 							document.getElementById("worldmap1").getContext("2d").fill();
 							}
 
@@ -350,8 +355,29 @@
 							{
 							document.getElementById("worldmap1").getContext("2d").beginPath();
 							document.getElementById("worldmap1").getContext("2d").arc(IP2.x, IP2.y, 3, 0, 2 * Math.PI);
-							document.getElementById("worldmap1").getContext("2d").fillStyle = "#32cd32";
+							document.getElementById("worldmap1").getContext("2d").fillStyle = "red";
 							document.getElementById("worldmap1").getContext("2d").fill();
+							}
+
+						// CHECKING IF THE DISTANCE BETWEEN IPS CAN BE CALCULATED
+						if (IP1!=null && IP2!=null)
+							{
+							var distanceValueInKM = calcCrow(IP1.latitude,IP1.longitude,IP2.latitude,IP2.longitude).toFixed(2)
+							var distanceValueInMilles = (distanceValueInKM * 0.621371).toFixed(2);
+
+							if (userLanguage.substring(0,2)=="es")
+								{
+								document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInKM + " Kms";
+								}
+							else
+								{
+								document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInMilles + " mi";
+								}
+
+							}
+							else
+							{
+							document.getElementsByClassName("distance")[0].innerHTML = "";
 							}
 						}
 					}
@@ -360,6 +386,26 @@
 					// UPDATING THE LABEL
 					document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = "ERROR";
 					}
+				}
+
+			// https://stackoverflow.com/questions/18883601/function-to-calculate-distance-between-two-coordinates
+			function calcCrow(lat1, lon1, lat2, lon2)
+				{
+				function toRad(Value) // Converts numeric degrees to radians
+					{
+					return Value * Math.PI / 180;
+					}
+
+				var R = 6371; // km
+				var dLat = toRad(lat2-lat1);
+				var dLon = toRad(lon2-lon1);
+				var lat1 = toRad(lat1);
+				var lat2 = toRad(lat2);
+
+				var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+				var d = R * c;
+				return d;
 				}
 
 			// SCALING THE CANVAS SIZE FOR THE GAME
