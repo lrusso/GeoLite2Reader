@@ -365,15 +365,21 @@
 							var distanceValueInKM = calcCrow(IP1.latitude,IP1.longitude,IP2.latitude,IP2.longitude).toFixed(2)
 							var distanceValueInMilles = (distanceValueInKM * 0.621371).toFixed(2);
 
-							if (userLanguage.substring(0,2)=="es")
+							if (isNaN(distanceValueInKM)==true)
 								{
-								document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInKM + " Kms";
+								document.getElementsByClassName("distance")[0].innerHTML = "";
 								}
 							else
 								{
-								document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInMilles + " mi";
+								if (userLanguage.substring(0,2)=="es")
+									{
+									document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInKM + " Kms";
+									}
+								else
+									{
+									document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInMilles + " mi";
+									}
 								}
-
 							}
 							else
 							{
