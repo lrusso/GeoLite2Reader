@@ -42,6 +42,14 @@
 			.abouthidden{animation:fadeOut 1.5s;animation-fill-mode:forwards}
 			@keyframes fadeOut{0%{opacity:1}99%{opacity:0.01}100%{opacity:0}}
 
+			/* Smartphones (portrait and landscape)(small) */
+			@media screen and (min-width: 0px) and (max-width: 830px)
+				{
+				.geodata1{font-size:11px;line-height:15px}
+				.geodata2{font-size:11px;line-height:15px}
+				.distance{font-size:11px;line-height:15px}
+				}
+
 			/* iPods and other very small devices (portrait and landscape)(very small) */
 			@media screen and (min-width: 0) and (max-width: 320px)
 				{
@@ -329,13 +337,17 @@
 						var locationX = ((RAWDATA[4] / 360) + 0.5) * document.getElementById("worldmap1").width;
 						var locationY = (1 - ((RAWDATA[3] / 180) + 0.5)) * document.getElementById("worldmap1").height;
 
-						// SAVING THE IP LOCATION
+						// CHECKING IF THE FIRST IP WAS REQUESTED FOR GEOLOCATION
 						if (findlocationIndex==1)
 							{
+							// SAVING THE FIRST IP LOCATION
 							IP1 = { x: locationX, y: locationY, latitude: RAWDATA[3], longitude: RAWDATA[4]};
 							}
+
+						// CHECKING IF THE SECOND IP WAS REQUESTED FOR GEOLOCATION
 						else if (findlocationIndex==2)
 							{
+							// SAVING THE SECOND IP LOCATION
 							IP2 = { x: locationX, y: locationY, latitude: RAWDATA[3], longitude: RAWDATA[4]};
 							}
 
@@ -346,6 +358,7 @@
 						// CHECKING IF THE FIRST DOT MUST BE DRAWN
 						if (IP1!=null)
 							{
+							// DRAWING THE FIRST DOT
 							document.getElementById("worldmap1").getContext("2d").beginPath();
 							document.getElementById("worldmap1").getContext("2d").arc(IP1.x, IP1.y, 3, 0, 2 * Math.PI);
 							document.getElementById("worldmap1").getContext("2d").fillStyle = "#32cd32";
@@ -355,6 +368,7 @@
 						// CHECKING IF THE SECOND DOT MUST BE DRAWN
 						if (IP2!=null)
 							{
+							// DRAWING THE SECOND DOT
 							document.getElementById("worldmap1").getContext("2d").beginPath();
 							document.getElementById("worldmap1").getContext("2d").arc(IP2.x, IP2.y, 3, 0, 2 * Math.PI);
 							document.getElementById("worldmap1").getContext("2d").fillStyle = "red";
@@ -364,27 +378,36 @@
 						// CHECKING IF THE DISTANCE BETWEEN IPS CAN BE CALCULATED
 						if (IP1!=null && IP2!=null)
 							{
+							// GETTING THE DISTANCE IN KILOMETERS
 							var distanceValueInKM = calcCrow(IP1.latitude,IP1.longitude,IP2.latitude,IP2.longitude).toFixed(2)
+
+							// GETTING THE DISTANCE IN MILES
 							var distanceValueInMilles = (distanceValueInKM * 0.621371).toFixed(2);
 
+							// CHECKING IF THERE WAS AN ERROR WHILE CALCULATING THE DISTANCE
 							if (isNaN(distanceValueInKM)==true)
 								{
+								// CLEARING THE DISTANCE LABEL
 								document.getElementsByClassName("distance")[0].innerHTML = "";
 								}
 							else
 								{
+								// CHECKING THE USER LANGUAGE
 								if (userLanguage.substring(0,2)=="es")
 									{
+									// UPDATING THE DISTANCE LABEL WITH THE DISTANCE VALUE IN KILOMETERS
 									document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInKM + " km";
 									}
 								else
 									{
+									// UPDATING THE DISTANCE LABEL WITH THE DISTANCE VALUE IN MILES
 									document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInMilles + " mi";
 									}
 								}
 							}
 							else
 							{
+							// CLEARING THE DISTANCE LABEL
 							document.getElementsByClassName("distance")[0].innerHTML = "";
 							}
 						}
@@ -399,12 +422,12 @@
 			// https://stackoverflow.com/questions/18883601/function-to-calculate-distance-between-two-coordinates
 			function calcCrow(lat1, lon1, lat2, lon2)
 				{
-				function toRad(Value) // Converts numeric degrees to radians
+				function toRad(Value) // CONVERTS NUMERIC DEGREES TO RADIANS
 					{
 					return Value * Math.PI / 180;
 					}
 
-				var R = 6371; // km
+				var R = 6371; // KM
 				var dLat = toRad(lat2-lat1);
 				var dLon = toRad(lon2-lon1);
 				var lat1 = toRad(lat1);
