@@ -439,21 +439,6 @@
 				return d;
 				}
 
-			// SCALING THE CANVAS SIZE FOR THE GAME
-			function resizeCanvas()
-				{
-				try
-					{
-					var scaleX = window.innerWidth / 800;
-					var scaleY = window.innerHeight / 450;
-					document.getElementById("worldmap1").style.width = (800 * scaleX) + "px";
-					document.getElementById("worldmap1").style.height = (450 * scaleY) + "px";
-					}
-					catch(err)
-					{
-					}
-				}
-
 			function inputCustom(title,yes,no,myCallback,findlocationIndex)
 				{
 				try
@@ -582,6 +567,21 @@
 
 					// FOCUSING THE INPUT TEXT
 					inputTextbox.focus();
+					}
+					catch(err)
+					{
+					}
+				}
+
+			// SCALING THE CANVAS SIZE FOR THE GAME
+			function resizeCanvas()
+				{
+				try
+					{
+					var scaleX = window.innerWidth / 800;
+					var scaleY = window.innerHeight / 450;
+					document.getElementById("worldmap1").style.width = (800 * scaleX) + "px";
+					document.getElementById("worldmap1").style.height = (450 * scaleY) + "px";
 					}
 					catch(err)
 					{
