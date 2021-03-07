@@ -224,7 +224,7 @@ function getDatabase_Locations()
 	oReq.send(null);
 	}
 
-function geolocateIP(requestedIP)
+function geolocateIP(requestedIP,findlocationIndex)
 	{
 	try
 		{
@@ -293,12 +293,12 @@ function geolocateIP(requestedIP)
 			}
 
 		// SENDING THE RESULT LOCATION TO THE BROWSER
-		self.postMessage("RESULT=" + IP_Region + "," + IP_Country + "," + IP_City + "," + IP_Latitude + "," + IP_Longitude);
+		self.postMessage("RESULT" + findlocationIndex +  "=" + IP_Region + "," + IP_Country + "," + IP_City + "," + IP_Latitude + "," + IP_Longitude + "," + requestedIP);
 		}
 		catch(err)
 		{
 		// SENDING AN ERROR EVENT TO THE BROWSER
-		self.postMessage("RESULT=ERROR");
+		self.postMessage("RESULT" + findlocationIndex +  "=ERROR");
 		}
 	}
 
@@ -336,10 +336,17 @@ self.addEventListener("message", function (e)
 			}
 
 		// CHECKING IF THE BROWSER SETN A MESSAGE TO GEOLOCATE AN IP
-		else if (workerMessage.indexOf("GEOLOCATE=")===0)
+		else if (workerMessage.indexOf("GEOLOCATE1=")===0)
 			{
 			// FINDING THE REQUESTED IP
-			geolocateIP(workerMessage.substr(10,workerMessage.length));
+			geolocateIP(workerMessage.substr(11,workerMessage.length),1);
+			}
+
+		// CHECKING IF THE BROWSER SETN A MESSAGE TO GEOLOCATE AN IP
+		else if (workerMessage.indexOf("GEOLOCATE2=")===0)
+			{
+			// FINDING THE REQUESTED IP
+			geolocateIP(workerMessage.substr(11,workerMessage.length),2);
 			}
 		}
 		catch(err)

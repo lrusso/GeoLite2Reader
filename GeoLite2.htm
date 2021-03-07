@@ -21,12 +21,14 @@
 			html,body{background-color:black;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 
 			.container{position:fixed;left:0;top:0;right:0;bottom:0;background-color:gray;display:none}
-			.finding{position:fixed;width:64px;height:64px;left:5px;right:0;top:5px;bottom:0;border:0;display:none}
 			.findlocation1{position:fixed;top:0px;right:0px;width:58px;height:58px;padding:10px 10px 0 10px;border-bottom-left-radius:10px;background-color:rgba(0,0,0,0.5);cursor:pointer;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QMGFywEz6Mf3wAAA7ZJREFUaN7VmctL1UEUx890Kx/lo3caaCXUImphgSFSbqM2QQ+C9kKrNilBkLgq/wE3SYmBJG7CRSRZYAsXRm16Loq7EC173aSHlff3aTPCz2l+9/6et1/flc79zTnnO3PmzDlnlEQAoESkRkTqRaRSRGZF5J1SalHSCEABzUAP8Bj4xt/IA9PAIHACWJsGw1cAZ4HXBMcC0Ads/VfGtwNPiI6vQDdQXkp36QScIoZ9Bp4Dj7TrLBb5fhKoS9r4cuCmhwE/gWHgDFBrmZsBWoArwBsPGdPA/iRX3ma8AwwAjQXmrtTkK/T/q4AOYNYi7yOwMwkCFyzKPgDtAeVsARr039XAqEXuU6Aq7gNr+vwLYEcEmZuBddq1ei0kbsUZKp9YVn5HTPKrtXsOWEi0xaHgrMXn22N2z9VAGTBliUwq6sE1L6kBv/Mdx1nm3z50tVh24UgUAs2WUNlYaE42my1bWFjY6ThOt+M4eb8EXDpHDJ39UQj0GMKGfczxhM/zdtiYNgdkwhJ4bAg7kzCBch2V3htTW4PavkIfnt3G+J2EM5VfSqm8iNw1xncFJqDz+UrXWE4plSs2UbkQgkD10lEyxreFIVBvjM2WIlf00FUfhkClMfY9aeuVUl88dK0JQ8BchVIWHqaumTAE3omI4xYaOpwFR11kAroAd+9CRkQOlIiAGTanw+yAiMgDY/x4kHsgyG+ubxpExF3U5EVkIiyB28b4KWBlwqtvXpYPlVKfwt7EVbp74EZH2Ju42A4Atboic+N81FS3zxA4C1QnVLZeNXTlgA1RhW7VrQ83RuOOSMAxS9XXGZfwbosX9EYqNpbL3wfMW4r7ijjbKZMWEjeiNqT0ys97HJVLcS2SAHW6b2NiCmgJIa9W+3yxBtl1YHVcJPZbosQSRnQxkikiowHoKiDHhvvAukB5VQEDmvT9sMfjkw86n8/qm/y7zm3q9A0btvP2UkSOKqXexLETVcAt4oPf3ZgDDsYZ+to8Drdf5HSjuAK47HPOD+Bk3D3TI0C/pZa1YRF4AJx3X1JazmAA8l2FIpQKSSYjIi26ht2mK6k1Oh2e0VnlhFduA5SJyJiIHPKp8pqInFNK/Za0AFgPvAqwE2NAjaQJQJNPd3R3sxvTRqLVkgkXwtvEHkcikDgdMKrNLb09pInExYAkxtNGQAHXAhBYTOOhXgXcC0Bir6QNOnt95sP4fMnenEOQ2K6jTSEMSZqhU/o5D+NngI2SduiaYtz1+p8HhoBN8j8BqAH22mrnP1dxU2LKlxINAAAAAElFTkSuQmCC");background-repeat:no-repeat;background-position:center center;display:none}
 			.waitlocation1{position:fixed;top:0px;right:0px;width:58px;height:58px;padding:10px 10px 0 10px;border-bottom-left-radius:10px;background-color:rgba(0,0,0,0.5);cursor:default;text-align:center}
 			.findlocation2{position:fixed;bottom:0px;right:0px;width:58px;height:58px;padding:10px 10px 0 10px;border-top-left-radius:10px;background-color:rgba(0,0,0,0.5);cursor:pointer;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QMGFyw3cHN+yQAABE5JREFUaN7VmU1oXFUUx8/tTDJNNF/VaJJKai2KIHXRLiKhaLbFCi78oNCFC6EiCgWxpSh06EJqQRBFu2nRNEJpyUa7sloFRYpamo1Ru7AEDEmN/UhCTBx8c35ubuB5ve/NvI/U5x+Gmbnce875v3vOuefcZyQDACMiXSIyICLtIjIrIr8ZYwIpIgADbAMOA5eAP/g36sA0MAY8BdxeBMPXAXuAX0iOP4FjQN9/ZfwIMEF2LAFVYP2tdJf9gDYw7CbwI3DRuk7QYP4FoH+tjV8PfBRhQA04A+wGuj1rS8AQcAS4EiFjGti+lk/eZ7wCo8CmmLVlS77N/m8B9gKzHnnXgfvWgsCrHmXXgJGEcu4GBu3vTuCsR+4PQEfeAev6/E/A5gwy7wJ6rGsd9ZA4nWeqnPA8+c05ye+07jnqIbEjDwV7PD4/krN7tgIV4HtPZjJZA9c9pEaj5gdBsEtV31PV71T1hqoGqrqoqhOq+sbS0lJvA11Dnl3YmYXANk+qjMs2sVDVq7Va7f4GOsedZSeyEDjsCDvTYD5NkPikQbw95iyZA0ppCVxyhO2Om6+qv9br9ddqtdqDU1NTlZWVlXtU9aRDYLHBQVkCfnf0Dqf1f7eq7E4qZ2FhocchcDNuB+y3e2A+l1TvOlvPt4fG5o0x80kFVSqVHmfo25jpnfZ7yhnfmIbAgDM2m8YNW1tbDzpu9lbcxkfoGkhDoN0ZW04qpF6vv2CMeT7kIm+Xy+XPouYbYxYidN2WhoD7FPoSGv+yMeb9kPEnx8fHX2lyuatrJk0Ql20buIqgmXQ2OTnZoqrvhoJWVfVQtVo1CXS/4wTxS2nT6LQjaChu/vLy8kZV/SZk/PUgCJ5Iofeio/fJtATGHEFHGpwDc832kTE6B52pAbAhTQyIiHzsjD8DlGOCsDeH2s49LL82xtxIuwMd9vYgjL1ZSom4HQC6bUcWxr6spe4xR+As0LlGbeubjq554I6sQvvs1UcYZ1MXWNF6dnm6vv15Ca96vOBopmbjn/IfBhY9zX1bntcpFzwkPsx6IWWf/GJEqLye10MSoN9zLmDbwKEU8rqtzze6IPsAaM2LxHZPlljFuG1GSg1kDAIHYuT48AXQk8RWE2PAFns+PBQx5ZqIfGpL4llbmPWJSL+IDItI2pu3n0XkcWPMlTx2ogM4TX5odjfmgEfyTH07IoK7Wczbi+I24FCTa1aAp/O+M90JnPD0sj4EwJfAvvAhZeWMJSB/IC5DmZRkSiIyJCIP2DZwwDYjM/YzLSJfRdU2QEVEzonIo02qPC4iLxpj/pKiANgAXE6wE+eALikSgC1NumP4NntT0UgMeyrhOFxds5cjGUg8mzCrza2+eygSiYMJSZwvGgEDHE9AIChiULcAnycgsVWKBlu9TjZhfP2WvXNOQeJem23icEqKDFvSR13fzAB3StFhe4rzobf/deAU0Cv/JwBdwFZf7/w3admB9aCzB0QAAAAASUVORK5CYII=");background-repeat:no-repeat;background-position:center center}
 			.waitlocation2{position:fixed;bottom:0px;right:0px;width:58px;height:58px;padding:10px 10px 0 10px;border-top-left-radius:10px;background-color:rgba(0,0,0,0.5);cursor:default;text-align:center;display:none}
-			.geodata{position:fixed;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
+			.finding1{position:fixed;width:64px;height:64px;left:5px;right:0;top:5px;bottom:0;border:0;display:none}
+			.finding2{position:fixed;width:64px;height:64px;left:5px;right:0;bottom:5px;bottom:0;border:0;display:none}
+			.geodata1{position:fixed;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
+			.geodata2{position:fixed;bottom:0;left:0;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
 			#worldmap1{border:1px solid black;left:0;right:0;margin:0 auto;position:absolute;top:50%;transform:translateY(-50%)}
 
 			.filename{position:fixed;width:200px;height:64px;left:0;right:0;top:110px;bottom:0;margin:auto auto;border:0;font-family:Arial;font-weight:bold;font-size:20px;background-color:black;color:white;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;cursor:default}
@@ -84,8 +86,10 @@
 		<div class="percentage"></div>
 		<div class="container">
 			<canvas id="worldmap1" width="800" height="450"></canvas>
-			<div class="finding"><div class="lds-spinner2"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
-			<div class="geodata"></div>
+			<div class="finding1"><div class="lds-spinner2"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+			<div class="finding2"><div class="lds-spinner2"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+			<div class="geodata1"></div>
+			<div class="geodata2"></div>
 			<div class="findlocation1"></div>
 			<div class="waitlocation1"><div class="lds-spinner2"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
 			<div class="findlocation2"></div>
@@ -107,9 +111,13 @@
 			var STRING_INPUTMODAL_OK = "";
 			var STRING_INPUTMODAL_CANCEL = "";
 
-			var IP_EXAMPLE = "186.137.149.249";
+			var IP1_EXAMPLE = "186.137.149.249";
+			var IP2_EXAMPLE = "11.11.11.11";
 
 			var IP_TO_GEOLOCATE = "";
+
+			var IP1 = null;
+			var IP2 = null;
 
 			// CHECKING THE USER LANGUAGE
 			if (userLanguage.substring(0,2)=="es")
@@ -184,12 +192,18 @@
 							}, 4500);
 
 						// GEOLOCATING THE EXAMPLE IP
-						geolocateIP(IP_EXAMPLE);
+						geolocateIP(IP1_EXAMPLE,1);
+						geolocateIP(IP2_EXAMPLE,2);
 						}
-					else if (myReceivedData.indexOf("RESULT=")===0)
+					else if (myReceivedData.indexOf("RESULT1=")===0)
 						{
 						// SHOWING THE RESULT IN THE MAP
-						showDataInMap(myReceivedData.substr(7,myReceivedData.length));
+						showDataInMap(myReceivedData.substr(8,myReceivedData.length),1);
+						}
+					else if (myReceivedData.indexOf("RESULT2=")===0)
+						{
+						// SHOWING THE RESULT IN THE MAP
+						showDataInMap(myReceivedData.substr(8,myReceivedData.length),2);
 						}
 					}
 					catch(err)
@@ -199,7 +213,7 @@
 				return true;
 				}
 
-			function geolocateIP(IPValue)
+			function geolocateIP(IPValue, findlocationIndex)
 				{
 				// CHECKING IF A VALUE WAS RECEIVED
 				if (IPValue!=undefined)
@@ -219,42 +233,42 @@
 						IP_TO_GEOLOCATE = IPValue;
 
 						// CLEARING THE GEODATA LABEL
-						document.getElementsByClassName("geodata")[0].innerHTML = "";
+						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = "";
 
 						// HIDING THE FIND LOCATION 1 ICON
-						document.getElementsByClassName("findlocation1")[0].style.display = "none";
+						document.getElementsByClassName("findlocation" + findlocationIndex)[0].style.display = "none";
 
 						// SHOWING THE LOADING ICONS
-						document.getElementsByClassName("waitlocation1")[0].style.display = "block";
-						document.getElementsByClassName("finding")[0].style.display = "block";
+						document.getElementsByClassName("waitlocation" + findlocationIndex)[0].style.display = "block";
+						document.getElementsByClassName("finding" + findlocationIndex)[0].style.display = "block";
 
 						// REQUESTING THE WORKER TO GEOLOCATE THE IP
-						myWorker.postMessage("GEOLOCATE=" + IPValue);
+						myWorker.postMessage("GEOLOCATE" + findlocationIndex + "=" + IPValue);
 						}
 						else
 						{
 						// ADDING THE 'INVALID IP' TEXT VALUE
-						document.getElementsByClassName("geodata")[0].innerHTML = STRING_INVALIDIP + "<br />IP: " + IPValue;
+						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = STRING_INVALIDIP + "<br />IP: " + IPValue;
 						}
 					}
 				}
 
-			function showDataInMap(RAWDATA)
+			function showDataInMap(RAWDATA, findlocationIndex)
 				{
 				try
 					{
 					// HIDING THE LOADING ICONS
-					document.getElementsByClassName("waitlocation1")[0].style.display = "none";
-					document.getElementsByClassName("finding")[0].style.display = "none";
+					document.getElementsByClassName("waitlocation" + findlocationIndex)[0].style.display = "none";
+					document.getElementsByClassName("finding" + findlocationIndex)[0].style.display = "none";
 
-					// SHOWING THE FIND LOCATION 1 ICON
-					document.getElementsByClassName("findlocation1")[0].style.display = "block";
+					// SHOWING THE FIND LOCATION ICON
+					document.getElementsByClassName("findlocation" + findlocationIndex)[0].style.display = "block";
 
 					// CHECKING IF THERE WAS AN ERROR
 					if (RAWDATA=="ERROR")
 						{
 						// UPDATING THE LABEL
-						document.getElementsByClassName("geodata")[0].innerHTML = "ERROR";
+						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = "ERROR";
 						}
 						else
 						{
@@ -265,64 +279,84 @@
 						if (RAWDATA[0]!="null")
 							{
 							// ADDING THE REGION VALUE
-							document.getElementsByClassName("geodata")[0].innerHTML = RAWDATA[0];
+							document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = RAWDATA[0];
 
 							// CHECKING IF THERE IS A COUNTRY
-							if (RAWDATA[1]!="")
+							if (RAWDATA[1]!="" && RAWDATA[2]!="undefined")
 								{
 								// ADDING THE COUNTRY VALUE
-								document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br />" + RAWDATA[1];
+								document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML + "<br />" + RAWDATA[1];
 								}
 
 							// CHECKING IF THERE IS A CITY
-							if (RAWDATA[2]!="")
+							if (RAWDATA[2]!="" && RAWDATA[2]!="undefined")
 								{
 								// ADDING THE CITY VALUE
-								document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br />" + RAWDATA[2];
+								document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML + "<br />" + RAWDATA[2];
 								}
 
 							// CHECKING IF THERE IS A LATITUDE
-							if (RAWDATA[3]!="")
+							if (RAWDATA[3]!="" && RAWDATA[3]!="undefined")
 								{
 								// ADDING THE LATITUDE VALUE
-								document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br />" + STRING_LATITUDE + RAWDATA[3];
+								document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML + "<br />" + STRING_LATITUDE + RAWDATA[3];
 								}
 
 							// CHECKING IF THERE IS A LONGITUDE
-							if (RAWDATA[4]!="")
+							if (RAWDATA[4]!="" && RAWDATA[4]!="undefined")
 								{
 								// ADDING THE LONGITUDE VALUE
-								document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br />" + STRING_LONGITUDE + RAWDATA[4];
+								document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML + "<br />" + STRING_LONGITUDE + RAWDATA[4];
 								}
 							}
 							else
 							{
 							// ADDING THE 'IP NOT FOUND' TEXT VALUE
-							document.getElementsByClassName("geodata")[0].innerHTML = STRING_IPNOTFOUND;
+							document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = STRING_IPNOTFOUND;
 							}
 
 						// ADDING THE IP VALUE
-						document.getElementsByClassName("geodata")[0].innerHTML = document.getElementsByClassName("geodata")[0].innerHTML + "<br/>IP: " + IP_TO_GEOLOCATE;
+						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML + "<br/>IP: " + RAWDATA[5];
 
 						// GETTING THE IP LOCATION WITHIN THE WORLDMAP
 						var locationX = ((RAWDATA[4] / 360) + 0.5) * document.getElementById("worldmap1").width;
 						var locationY = (1 - ((RAWDATA[3] / 180) + 0.5)) * document.getElementById("worldmap1").height;
 
+						// SAVING THE IP LOCATION
+						if (findlocationIndex==1)
+							{
+							IP1 = { x: locationX, y: locationY };
+							}
+						else if (findlocationIndex==2)
+							{
+							IP2 = { x: locationX, y: locationY };
+							}
+
 						// REDRAWING THE WORLDMAP
 						var map = new Map();
 						map.draw(document.getElementById("worldmap1"));
 
-						// DRAWING THE RED DOT
-						document.getElementById("worldmap1").getContext("2d").beginPath();
-						document.getElementById("worldmap1").getContext("2d").arc(locationX, locationY, 3, 0, 2 * Math.PI);
-						document.getElementById("worldmap1").getContext("2d").fillStyle = "red";
-						document.getElementById("worldmap1").getContext("2d").fill();
+						// CHECKING IF THE FIRST DOT MUST BE DRAWN
+						if (IP1!=null)
+							{
+							document.getElementById("worldmap1").getContext("2d").beginPath();
+							document.getElementById("worldmap1").getContext("2d").arc(IP1.x, IP1.y, 3, 0, 2 * Math.PI);
+							document.getElementById("worldmap1").getContext("2d").fillStyle = "red";
+							document.getElementById("worldmap1").getContext("2d").fill();
+							}
+
+						// CHECKING IF THE SECOND DOT MUST BE DRAWN
+						if (IP2!=null)
+							{
+							document.getElementById("worldmap1").getContext("2d").beginPath();
+							document.getElementById("worldmap1").getContext("2d").arc(IP2.x, IP2.y, 3, 0, 2 * Math.PI);
+							document.getElementById("worldmap1").getContext("2d").fillStyle = "#32cd32";
+							document.getElementById("worldmap1").getContext("2d").fill();
+							}
 						}
 					}
 					catch(err)
 					{
-					// UPDATING THE LABEL
-					document.getElementsByClassName("geodata")[0].innerHTML = "ERROR";
 					}
 				}
 
@@ -341,7 +375,7 @@
 					}
 				}
 
-			function inputCustom(title,yes,no,myCallback)
+			function inputCustom(title,yes,no,myCallback,findlocationIndex)
 				{
 				try
 					{
@@ -400,7 +434,7 @@
 						if (event.keyCode == 13)
 							{
 							// EXECUTING THE CALLBACK FUNCTION
-							myCallback(inputTextbox.value);
+							myCallback(inputTextbox.value, findlocationIndex);
 
 							// REMOVING THE INPUT CONTAINER
 							document.body.removeChild(inputContainer);
@@ -426,7 +460,7 @@
 					inputButtonYes.addEventListener("click",function(event)
 						{
 						// EXECUTING THE CALLBACK FUNCTION
-						myCallback(inputTextbox.value);
+						myCallback(inputTextbox.value, findlocationIndex);
 
 						// REMOVING THE INPUT CONTAINER
 						document.body.removeChild(inputContainer);
@@ -502,7 +536,14 @@
 				document.getElementsByClassName("findlocation1")[0].addEventListener("click",function(event)
 					{
 					// SHOWING THE INPUT MODAL
-					inputCustom(STRING_INPUTMODAL_TITLE,STRING_INPUTMODAL_OK,STRING_INPUTMODAL_CANCEL, geolocateIP);
+					inputCustom(STRING_INPUTMODAL_TITLE,STRING_INPUTMODAL_OK,STRING_INPUTMODAL_CANCEL, geolocateIP, 1);
+					});
+
+				// SETTING WHAT WILL HAPPEN WHEN THE USER CLICKS ON THE FIND LOCATION 1 ICON
+				document.getElementsByClassName("findlocation2")[0].addEventListener("click",function(event)
+					{
+					// SHOWING THE INPUT MODAL
+					inputCustom(STRING_INPUTMODAL_TITLE,STRING_INPUTMODAL_OK,STRING_INPUTMODAL_CANCEL, geolocateIP, 2);
 					});
 				});
 		</script>
