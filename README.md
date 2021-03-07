@@ -19,4 +19,3 @@ https://dev.maxmind.com/geoip/geoip2/geolite2
 ## Roadmap:
 
 * Finding IPv6 addresses.
-* Distance calculator between two IPs.
