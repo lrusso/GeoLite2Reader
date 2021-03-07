@@ -20,7 +20,7 @@
 		<style>
 			html,body{background-color:black;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 
-			.container{position:fixed;left:0;top:0;right:0;bottom:0;background-color:gray;display:none}
+			.container{position:fixed;left:0;top:0;right:0;bottom:0;background-color:black;display:none}
 			.findlocation1{position:fixed;top:0px;right:0px;width:58px;height:58px;padding:10px 10px 0 10px;border-bottom-left-radius:10px;background-color:rgba(0,0,0,0.5);cursor:pointer;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QMGFywEz6Mf3wAAA7ZJREFUaN7VmctL1UEUx890Kx/lo3caaCXUImphgSFSbqM2QQ+C9kKrNilBkLgq/wE3SYmBJG7CRSRZYAsXRm16Loq7EC173aSHlff3aTPCz2l+9/6et1/flc79zTnnO3PmzDlnlEQAoESkRkTqRaRSRGZF5J1SalHSCEABzUAP8Bj4xt/IA9PAIHACWJsGw1cAZ4HXBMcC0Ads/VfGtwNPiI6vQDdQXkp36QScIoZ9Bp4Dj7TrLBb5fhKoS9r4cuCmhwE/gWHgDFBrmZsBWoArwBsPGdPA/iRX3ma8AwwAjQXmrtTkK/T/q4AOYNYi7yOwMwkCFyzKPgDtAeVsARr039XAqEXuU6Aq7gNr+vwLYEcEmZuBddq1ei0kbsUZKp9YVn5HTPKrtXsOWEi0xaHgrMXn22N2z9VAGTBliUwq6sE1L6kBv/Mdx1nm3z50tVh24UgUAs2WUNlYaE42my1bWFjY6ThOt+M4eb8EXDpHDJ39UQj0GMKGfczxhM/zdtiYNgdkwhJ4bAg7kzCBch2V3htTW4PavkIfnt3G+J2EM5VfSqm8iNw1xncFJqDz+UrXWE4plSs2UbkQgkD10lEyxreFIVBvjM2WIlf00FUfhkClMfY9aeuVUl88dK0JQ8BchVIWHqaumTAE3omI4xYaOpwFR11kAroAd+9CRkQOlIiAGTanw+yAiMgDY/x4kHsgyG+ubxpExF3U5EVkIiyB28b4KWBlwqtvXpYPlVKfwt7EVbp74EZH2Ju42A4Atboic+N81FS3zxA4C1QnVLZeNXTlgA1RhW7VrQ83RuOOSMAxS9XXGZfwbosX9EYqNpbL3wfMW4r7ijjbKZMWEjeiNqT0ys97HJVLcS2SAHW6b2NiCmgJIa9W+3yxBtl1YHVcJPZbosQSRnQxkikiowHoKiDHhvvAukB5VQEDmvT9sMfjkw86n8/qm/y7zm3q9A0btvP2UkSOKqXexLETVcAt4oPf3ZgDDsYZ+to8Drdf5HSjuAK47HPOD+Bk3D3TI0C/pZa1YRF4AJx3X1JazmAA8l2FIpQKSSYjIi26ht2mK6k1Oh2e0VnlhFduA5SJyJiIHPKp8pqInFNK/Za0AFgPvAqwE2NAjaQJQJNPd3R3sxvTRqLVkgkXwtvEHkcikDgdMKrNLb09pInExYAkxtNGQAHXAhBYTOOhXgXcC0Bir6QNOnt95sP4fMnenEOQ2K6jTSEMSZqhU/o5D+NngI2SduiaYtz1+p8HhoBN8j8BqAH22mrnP1dxU2LKlxINAAAAAElFTkSuQmCC");background-repeat:no-repeat;background-position:center center;display:none}
 			.waitlocation1{position:fixed;top:0px;right:0px;width:58px;height:58px;padding:10px 10px 0 10px;border-bottom-left-radius:10px;background-color:rgba(0,0,0,0.5);cursor:default;text-align:center}
 			.findlocation2{position:fixed;bottom:0px;right:0px;width:58px;height:58px;padding:10px 10px 0 10px;border-top-left-radius:10px;background-color:rgba(0,0,0,0.5);cursor:pointer;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QMGFyw3cHN+yQAABE5JREFUaN7VmU1oXFUUx8/tTDJNNF/VaJJKai2KIHXRLiKhaLbFCi78oNCFC6EiCgWxpSh06EJqQRBFu2nRNEJpyUa7sloFRYpamo1Ru7AEDEmN/UhCTBx8c35ubuB5ve/NvI/U5x+Gmbnce875v3vOuefcZyQDACMiXSIyICLtIjIrIr8ZYwIpIgADbAMOA5eAP/g36sA0MAY8BdxeBMPXAXuAX0iOP4FjQN9/ZfwIMEF2LAFVYP2tdJf9gDYw7CbwI3DRuk7QYP4FoH+tjV8PfBRhQA04A+wGuj1rS8AQcAS4EiFjGti+lk/eZ7wCo8CmmLVlS77N/m8B9gKzHnnXgfvWgsCrHmXXgJGEcu4GBu3vTuCsR+4PQEfeAev6/E/A5gwy7wJ6rGsd9ZA4nWeqnPA8+c05ye+07jnqIbEjDwV7PD4/krN7tgIV4HtPZjJZA9c9pEaj5gdBsEtV31PV71T1hqoGqrqoqhOq+sbS0lJvA11Dnl3YmYXANk+qjMs2sVDVq7Va7f4GOsedZSeyEDjsCDvTYD5NkPikQbw95iyZA0ppCVxyhO2Om6+qv9br9ddqtdqDU1NTlZWVlXtU9aRDYLHBQVkCfnf0Dqf1f7eq7E4qZ2FhocchcDNuB+y3e2A+l1TvOlvPt4fG5o0x80kFVSqVHmfo25jpnfZ7yhnfmIbAgDM2m8YNW1tbDzpu9lbcxkfoGkhDoN0ZW04qpF6vv2CMeT7kIm+Xy+XPouYbYxYidN2WhoD7FPoSGv+yMeb9kPEnx8fHX2lyuatrJk0Ql20buIqgmXQ2OTnZoqrvhoJWVfVQtVo1CXS/4wTxS2nT6LQjaChu/vLy8kZV/SZk/PUgCJ5Iofeio/fJtATGHEFHGpwDc832kTE6B52pAbAhTQyIiHzsjD8DlGOCsDeH2s49LL82xtxIuwMd9vYgjL1ZSom4HQC6bUcWxr6spe4xR+As0LlGbeubjq554I6sQvvs1UcYZ1MXWNF6dnm6vv15Ca96vOBopmbjn/IfBhY9zX1bntcpFzwkPsx6IWWf/GJEqLye10MSoN9zLmDbwKEU8rqtzze6IPsAaM2LxHZPlljFuG1GSg1kDAIHYuT48AXQk8RWE2PAFns+PBQx5ZqIfGpL4llbmPWJSL+IDItI2pu3n0XkcWPMlTx2ogM4TX5odjfmgEfyTH07IoK7Wczbi+I24FCTa1aAp/O+M90JnPD0sj4EwJfAvvAhZeWMJSB/IC5DmZRkSiIyJCIP2DZwwDYjM/YzLSJfRdU2QEVEzonIo02qPC4iLxpj/pKiANgAXE6wE+eALikSgC1NumP4NntT0UgMeyrhOFxds5cjGUg8mzCrza2+eygSiYMJSZwvGgEDHE9AIChiULcAnycgsVWKBlu9TjZhfP2WvXNOQeJem23icEqKDFvSR13fzAB3StFhe4rzobf/deAU0Cv/JwBdwFZf7/w3admB9aCzB0QAAAAASUVORK5CYII=");background-repeat:no-repeat;background-position:center center}
@@ -29,7 +29,7 @@
 			.finding2{position:fixed;width:64px;height:64px;left:5px;right:0;bottom:5px;bottom:0;border:0;display:none}
 			.geodata1{position:fixed;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
 			.geodata2{position:fixed;bottom:0;left:0;z-index:9;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;padding:10px;text-shadow:0 0 3px #000000,0 0 7px #000000}
-			#worldmap1{position:fixed;left:0;top:0;right:0;bottom:0}
+			#worldmap1{position:fixed;left:0;top:0;right:0;bottom:0;margin:auto auto}
 			.distance{position:fixed;left:10px;top:0;bottom:0;margin:auto auto;height:20px;font-family:Arial;font-weight:bold;color:white;font-size:15px;line-height:20px;text-shadow:0 0 3px #000000,0 0 7px #000000}
 			.ip1{text-decoration:underline;text-decoration-color:#32cd32}
 			.ip2{text-decoration:underline;text-decoration-color:red}
@@ -578,10 +578,24 @@
 				{
 				try
 					{
+					// GETTING THE NEW SCALE FOR THE CANVAS
 					var scaleX = window.innerWidth / 800;
 					var scaleY = window.innerHeight / 450;
+
+					// UPDATING THE CANVAS WIDTH
 					document.getElementById("worldmap1").style.width = (800 * scaleX) + "px";
-					document.getElementById("worldmap1").style.height = (450 * scaleY) + "px";
+
+					// CHECKING IF THE ORIENTATION IS LANDSCAPE
+					if (window.innerWidth>window.innerHeight)
+						{
+						// UPDATING THE CANVAS HEIGHT
+						document.getElementById("worldmap1").style.height = (450 * scaleY) + "px";
+						}
+						else
+						{
+						// UPDATING THE CANVAS HEIGHT
+						document.getElementById("worldmap1").style.height = (450 * scaleX) + "px";
+						}
 					}
 					catch(err)
 					{
