@@ -231,7 +231,7 @@
 			function geolocateIP(IPValue, findlocationIndex)
 				{
 				// CHECKING IF A VALUE WAS RECEIVED
-				if (IPValue!=undefined)
+				if (IPValue!=undefined && IPValue!="")
 					{
 					// REGEXS FOR VALIDATING A IPV4 AND IPV6 ADDRESSES
 					var IPV4_VALIDATION = new RegExp("((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])")
@@ -264,6 +264,21 @@
 						{
 						// ADDING THE 'INVALID IP' TEXT VALUE
 						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = STRING_INVALIDIP + "<br /><div class='ip" + findlocationIndex + "'>IP: " + IPValue + "</div>";
+
+						// CHECKING IF THE FIRST IP WAS REQUESTED FOR GEOLOCATION
+						if (findlocationIndex==1)
+							{
+							// CLEARING ANY PREVIOUS DATA
+							IP1 = null;
+							}
+							else
+							{
+							// CLEARING ANY PREVIOUS DATA
+							IP2 = null;
+							}
+
+						// UPDATING THE MAP WITH THE NEW IP VALUES
+						updateMap();
 						}
 					}
 				}
@@ -351,71 +366,77 @@
 							IP2 = { x: locationX, y: locationY, latitude: RAWDATA[3], longitude: RAWDATA[4]};
 							}
 
-						// REDRAWING THE WORLDMAP
-						var map = new Map();
-						map.draw(document.getElementById("worldmap1"));
-
-						// CHECKING IF THE FIRST DOT MUST BE DRAWN
-						if (IP1!=null)
-							{
-							// DRAWING THE FIRST DOT
-							document.getElementById("worldmap1").getContext("2d").beginPath();
-							document.getElementById("worldmap1").getContext("2d").arc(IP1.x, IP1.y, 3, 0, 2 * Math.PI);
-							document.getElementById("worldmap1").getContext("2d").fillStyle = "#32cd32";
-							document.getElementById("worldmap1").getContext("2d").fill();
-							}
-
-						// CHECKING IF THE SECOND DOT MUST BE DRAWN
-						if (IP2!=null)
-							{
-							// DRAWING THE SECOND DOT
-							document.getElementById("worldmap1").getContext("2d").beginPath();
-							document.getElementById("worldmap1").getContext("2d").arc(IP2.x, IP2.y, 3, 0, 2 * Math.PI);
-							document.getElementById("worldmap1").getContext("2d").fillStyle = "red";
-							document.getElementById("worldmap1").getContext("2d").fill();
-							}
-
-						// CHECKING IF THE DISTANCE BETWEEN IPS CAN BE CALCULATED
-						if (IP1!=null && IP2!=null)
-							{
-							// GETTING THE DISTANCE IN KILOMETERS
-							var distanceValueInKM = calcCrow(IP1.latitude,IP1.longitude,IP2.latitude,IP2.longitude).toFixed(2)
-
-							// GETTING THE DISTANCE IN MILES
-							var distanceValueInMilles = (distanceValueInKM * 0.621371).toFixed(2);
-
-							// CHECKING IF THERE WAS AN ERROR WHILE CALCULATING THE DISTANCE
-							if (isNaN(distanceValueInKM)==true)
-								{
-								// CLEARING THE DISTANCE LABEL
-								document.getElementsByClassName("distance")[0].innerHTML = "";
-								}
-							else
-								{
-								// CHECKING THE USER LANGUAGE
-								if (userLanguage.substring(0,2)=="es")
-									{
-									// UPDATING THE DISTANCE LABEL WITH THE DISTANCE VALUE IN KILOMETERS
-									document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInKM + " km";
-									}
-								else
-									{
-									// UPDATING THE DISTANCE LABEL WITH THE DISTANCE VALUE IN MILES
-									document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInMilles + " mi";
-									}
-								}
-							}
-							else
-							{
-							// CLEARING THE DISTANCE LABEL
-							document.getElementsByClassName("distance")[0].innerHTML = "";
-							}
+						// UPDATING THE MAP WITH THE NEW IP VALUES
+						updateMap();
 						}
 					}
 					catch(err)
 					{
 					// UPDATING THE LABEL
 					document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = "ERROR";
+					}
+				}
+
+			function updateMap()
+				{
+				// REDRAWING THE WORLDMAP
+				var map = new Map();
+				map.draw(document.getElementById("worldmap1"));
+
+				// CHECKING IF THE FIRST DOT MUST BE DRAWN
+				if (IP1!=null)
+					{
+					// DRAWING THE FIRST DOT
+					document.getElementById("worldmap1").getContext("2d").beginPath();
+					document.getElementById("worldmap1").getContext("2d").arc(IP1.x, IP1.y, 3, 0, 2 * Math.PI);
+					document.getElementById("worldmap1").getContext("2d").fillStyle = "#32cd32";
+					document.getElementById("worldmap1").getContext("2d").fill();
+					}
+
+				// CHECKING IF THE SECOND DOT MUST BE DRAWN
+				if (IP2!=null)
+					{
+					// DRAWING THE SECOND DOT
+					document.getElementById("worldmap1").getContext("2d").beginPath();
+					document.getElementById("worldmap1").getContext("2d").arc(IP2.x, IP2.y, 3, 0, 2 * Math.PI);
+					document.getElementById("worldmap1").getContext("2d").fillStyle = "red";
+					document.getElementById("worldmap1").getContext("2d").fill();
+					}
+
+				// CHECKING IF THE DISTANCE BETWEEN IPS CAN BE CALCULATED
+				if (IP1!=null && IP2!=null)
+					{
+					// GETTING THE DISTANCE IN KILOMETERS
+					var distanceValueInKM = calcCrow(IP1.latitude,IP1.longitude,IP2.latitude,IP2.longitude).toFixed(2);
+
+					// GETTING THE DISTANCE IN MILES
+					var distanceValueInMilles = (distanceValueInKM * 0.621371).toFixed(2);
+
+					// CHECKING IF THERE WAS AN ERROR WHILE CALCULATING THE DISTANCE
+					if (isNaN(distanceValueInKM)==true)
+						{
+						// CLEARING THE DISTANCE LABEL
+						document.getElementsByClassName("distance")[0].innerHTML = "";
+						}
+					else
+						{
+						// CHECKING THE USER LANGUAGE
+						if (userLanguage.substring(0,2)=="es")
+							{
+							// UPDATING THE DISTANCE LABEL WITH THE DISTANCE VALUE IN KILOMETERS
+							document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInKM + " km";
+							}
+							else
+							{
+							// UPDATING THE DISTANCE LABEL WITH THE DISTANCE VALUE IN MILES
+							document.getElementsByClassName("distance")[0].innerHTML = STRING_DISTANCE + distanceValueInMilles + " mi";
+							}
+						}
+					}
+					else
+					{
+					// CLEARING THE DISTANCE LABEL
+					document.getElementsByClassName("distance")[0].innerHTML = "";
 					}
 				}
 
