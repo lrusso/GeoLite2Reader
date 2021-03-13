@@ -233,6 +233,21 @@
 				// CHECKING IF A VALUE WAS RECEIVED
 				if (IPValue!=undefined && IPValue!="")
 					{
+					// CHECKING IF THE FIRST IP WAS REQUESTED FOR GEOLOCATION
+					if (findlocationIndex==1)
+						{
+						// CLEARING ANY PREVIOUS DATA
+						IP1 = null;
+						}
+						else
+						{
+						// CLEARING ANY PREVIOUS DATA
+						IP2 = null;
+						}
+
+					// UPDATING THE MAP WITH THE NEW IP VALUES
+					updateMap();
+
 					// REGEXS FOR VALIDATING A IPV4 AND IPV6 ADDRESSES
 					var IPV4_VALIDATION = new RegExp("((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])")
 					var IPV6_VALIDATION = new RegExp("(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))");
@@ -264,21 +279,6 @@
 						{
 						// ADDING THE 'INVALID IP' TEXT VALUE
 						document.getElementsByClassName("geodata" + findlocationIndex)[0].innerHTML = STRING_INVALIDIP + "<br /><div class='ip" + findlocationIndex + "'>IP: " + IPValue + "</div>";
-
-						// CHECKING IF THE FIRST IP WAS REQUESTED FOR GEOLOCATION
-						if (findlocationIndex==1)
-							{
-							// CLEARING ANY PREVIOUS DATA
-							IP1 = null;
-							}
-							else
-							{
-							// CLEARING ANY PREVIOUS DATA
-							IP2 = null;
-							}
-
-						// UPDATING THE MAP WITH THE NEW IP VALUES
-						updateMap();
 						}
 					}
 				}
