@@ -228,20 +228,41 @@ function geolocateIP(requestedIP,findlocationIndex)
 	{
 	try
 		{
+		var IPV4_VALIDATION = new RegExp("((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])")
+		var IPV6_VALIDATION = new RegExp("(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))");
+
+		// VALIDATING THE INPUTTED IP WITH THE IPV4 AND IPV6 FORMAT
+		var matchIPV4 = requestedIP.match(IPV4_VALIDATION);
+		var matchIPV6 = requestedIP.match(IPV6_VALIDATION);
+
+		// CHECKING IF IT IS A IPV4 ADDRESS
+		if (matchIPV4)
+			{
+			geolocateIPV4(requestedIP,findlocationIndex)
+			}
+		// ELSE CHECKING IF IT IS A IPV4 ADDRESS
+		else if (matchIPV6)
+			{
+			geolocateIPV6(requestedIP,findlocationIndex)
+			}
+		}
+		catch(err)
+		{
+		}
+	}
+
+function geolocateIPV4(requestedIP,findlocationIndex)
+	{
+	try
+		{
 		var IP_ToFind = requestedIP;
 		var IP_Parts = IP_ToFind.split(".");
 		var IP_Match = null;
 		var IP_Found = false;
 		var IP_Data = null;
 		var IP_GeoNameID = null;
-		var IP_Location = null;
-		var IP_LocationData = null;
-
 		var IP_Latitude = null;
 		var IP_Longitude = null;
-		var IP_Region = null;
-		var IP_Country = null;
-		var IP_City = null;
 
 		// LOOPING ALL THE IP POSSIBILITES TO FIND THE MOST ACCURATE LOCATION
 		for (var i=IP_Parts[2]; i>=0; i--)
@@ -269,6 +290,51 @@ function geolocateIP(requestedIP,findlocationIndex)
 					}
 				}
 			}
+
+		// RETURN THE IP DATA
+		getIPData(GEOIP2_LOCATIONS,IP_GeoNameID,IP_Latitude,IP_Longitude,requestedIP,findlocationIndex);
+		}
+		catch(err)
+		{
+		// SENDING AN ERROR EVENT TO THE BROWSER
+		self.postMessage("RESULT" + findlocationIndex +  "=ERROR");
+		}
+	}
+
+function geolocateIPV6(requestedIP,findlocationIndex)
+	{
+	try
+		{
+		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
+		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
+		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
+		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
+		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
+
+		// 2600:1700:1150:[4c30:]?[cad:]?[bfb6:]?[5f3c:?]?[7da1]?.*,
+
+		// 2600:1700:2891:4300:54f:3800:    :/85
+		// 2600:1700:1150:    :/45
+
+		self.postMessage("RESULT" + findlocationIndex +  "=ERROR");
+		}
+		catch(err)
+		{
+		// SENDING AN ERROR EVENT TO THE BROWSER
+		self.postMessage("RESULT" + findlocationIndex +  "=ERROR");
+		}
+	}
+
+function getIPData(GEOIP2_LOCATIONS,IP_GeoNameID,IP_Latitude,IP_Longitude,requestedIP,findlocationIndex)
+	{
+	try
+		{
+		// SETTING THE VARIABLES
+		var IP_Location = null;
+		var IP_LocationData = null;
+		var IP_Region = null;
+		var IP_Country = null;
+		var IP_City = null;
 
 		// FINDING THE IP LOCATION
 		IP_Location = GEOIP2_LOCATIONS.match(new RegExp(IP_GeoNameID));
