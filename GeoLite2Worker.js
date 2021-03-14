@@ -236,7 +236,7 @@ function geolocateIP(requestedIP,findlocationIndex)
 		var matchIPV6 = requestedIP.match(IPV6_VALIDATION);
 
 		// CHECKING IF IT IS A IPV4 ADDRESS
-		if (matchIPV4)
+		if (matchIPV4 && !matchIPV6)
 			{
 			geolocateIPV4(requestedIP,findlocationIndex)
 			}
@@ -305,18 +305,81 @@ function geolocateIPV6(requestedIP,findlocationIndex)
 	{
 	try
 		{
-		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
-		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
-		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
-		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
-		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
+		// ----------------------------------------------------------------------------
+		// EXPERIMENTAL PROCEDURE - TESTED WITH 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1
+		// ----------------------------------------------------------------------------
+		// WITH THE TESTED IP, THE SCRIPT WILL TRY TO FIND THE FOLLOWING POSSIBILITES:
+		// ----------------------------------------------------------------------------
+		// 2600:1700:1151:4c30:cad:bfb6:5f3c:7da1?.*
+		// 2600:1700:1151:4c30:cad:bfb6:5f3c:?.*
+		// 2600:1700:1151:4c30:cad:bfb6:?.*
+		// 2600:1700:1151:4c30:cad:?.*
+		// 2600:1700:1151:4c30:?.*
+		// 2600:1700:1151:?.*
+		// 2600:1700:115.?.*
 
-		// 2600:1700:1150:[4c30:]?[cad:]?[bfb6:]?[5f3c:?]?[7da1]?.*,
+		var IP_ToFind = requestedIP;
+		var IP_Parts = IP_ToFind.split(":");
+		var IP_Match = null;
+		var IP_Found = false;
+		var IP_Data = null;
+		var IP_GeoNameID = null;
+		var IP_Latitude = null;
+		var IP_Longitude = null;
 
-		// 2600:1700:2891:4300:54f:3800:    :/85
-		// 2600:1700:1150:    :/45
+		// LOOPING ALL THE IP POSSIBILITES TO FIND THE MOST ACCURATE LOCATION
+		for (var i=IP_Parts.length+1; i>1; i--)
+			{
+			// CREATING A TEMP VARIABLE TO START RECREATING THE ADDRESS
+			var tempRegex = "";
 
-		self.postMessage("RESULT" + findlocationIndex +  "=ERROR");
+			// LOOPING THE IPV6 ADDRESS PARTS
+			for (var j=0; j<i-1; j++)
+				{
+				// ADDING A PART OF THE ADDRESS
+				tempRegex = tempRegex + IP_Parts[j];
+
+				// CHECKING IF IT IS NOT THE LAST PART OF THE ADDRESS
+				if (j<IP_Parts.length-1)
+					{
+					// ADDING THE SEPARATOR
+					tempRegex = tempRegex + ":";
+					}
+				}
+
+			// CREATING THE REGEX TO FIND A LINE THAT CONTAINS THE IP
+			var IP_Regex = new RegExp(tempRegex + "?.*")
+
+			// CHECKING IF THE IP WASN'T FOUND ALREADY
+			if (IP_Found==false)
+				{
+				// CHECKING IF THE IP WAS NOT FOUND YET WITH ONLY A FEW SEPARATOR LEFT
+				if (i==3)
+					{
+					// ADDING A WILDCARD SEARCH
+					tempRegex = IP_Parts[0] + ":" + IP_Parts[1] + ":" + IP_Parts[2].replace(/.$/,".");
+					}
+
+				// FINDING THE IP
+				IP_Match = GEOIP2_BLOCKS_IPV6.match(IP_Regex);
+
+				// CHECKING IF THE IP WAS FOUND
+				if (IP_Match)
+					{
+					// SETTING THAT THE IP WAS FOUND
+					IP_Found = true;
+
+					// SETTING THE OBTAINED IP DATA
+					IP_Data = IP_Match[0].split(",");
+					IP_GeoNameID = IP_Data[1] + ".*\\s";
+					IP_Latitude = IP_Data[7];
+					IP_Longitude = IP_Data[8];
+					}
+				}
+			}
+
+		// RETURN THE IP DATA
+		getIPData(GEOIP2_LOCATIONS,IP_GeoNameID,IP_Latitude,IP_Longitude,requestedIP,findlocationIndex);
 		}
 		catch(err)
 		{
