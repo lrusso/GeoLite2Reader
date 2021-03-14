@@ -15,7 +15,3 @@ https://github.com/richardzcode/worldMap.js
 ## GeoLite2 database link (currently using from 2021-03-02):
 
 https://dev.maxmind.com/geoip/geoip2/geolite2
-
-## Roadmap:
-
-* Finding IPv6 addresses.
