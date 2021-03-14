@@ -230,6 +230,9 @@
 
 			function geolocateIP(IPValue, findlocationIndex)
 				{
+				// TRIMMING THE RECEIVED IP VALUE
+				IPValue = IPValue.trim();
+
 				// CHECKING IF A VALUE WAS RECEIVED
 				if (IPValue!=undefined && IPValue!="")
 					{
